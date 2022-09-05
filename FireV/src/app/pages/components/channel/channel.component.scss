@@ -17,7 +17,7 @@
   --color-white:#ffffff;
 }
 body{
-  // overflow: hidden;
+  overflow: hidden;
   min-height: 100vh;
   font-family: "Poppins", sans-serif;
 }
@@ -49,19 +49,17 @@ main{
   display: flex;
 }
 .content_left{
-  width: 30%;
+  width: 40%;
   padding-bottom: 40px;
 }
-.content_right{
-  width: 70%;
-}
+
 .user_avatar{
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: 15px solid var(#ffffff);
+  border: 15px solid #ffffff;
   margin: 0px auto;
-  margin-top: -114px;
+  margin-top: -115px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,13 +68,13 @@ main{
 .user_name{
   text-align:center;
   font-size:40px;
-  color: var(#ffffff);
+  color: #677179;
   font-weight:bold;
   text-transform: uppercase;
 }
 .user_position{
   text-align: center;
-  color: var(#ffffff);
+  color: #677179;
 }
 .user_analysis{
   width: 330px;
@@ -88,4 +86,90 @@ main{
   padding-bottom: 30px;
   border-bottom: 1px solid red;
   // min-height: 75px
+}
+.user_analysis .item{
+  text-align: center;
+  color: #677179;
+  font-weight:bold;
+}
+
+.user_desc{
+  margin-top: 25px;
+  line-height: 30px;
+  letter-spacing: 0.04rem;
+  color: var(#B5BDD1);
+
+}
+.btn_connect{
+  width: 240px;
+  height: 55px;
+  color: var(#ffffff);
+  background: var(#677179);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px auto;
+  margin-top: 50px;
+  border-radius: 5px;
+}
+
+.content_right{
+  width: 60%;
+  padding: 90px 60px;
+}
+.content_header{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.content_menu{
+  display:flex;
+  gap: 70px;
+}
+.content_menu .link:first-child a{
+  color: #677179;
+  font-weight:bold;
+}
+.content_menu .link a{
+  color: #B5BDD1;
+  transition: 0.3s color;
+}
+.content_menu .link:hover a{
+  color: #677179;
+}
+.btn_follow{
+  width:120px;
+  height:40px;
+  background: #0C8AFF;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.list_photos{
+  width: 500px;
+  height: 300px;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 40px;
+  background-position: center;
+    background-size: cover;
+    // background-repeat: no-repeat;
+    // image-rendering: pixelated;
+
+}
+.list_photos .photo_item{
+  width: 500px;
+  height: 300px;
+  overflow: hidden;
+  margin-bottom: 35px;
+  border-radius: 5px;
+}
+.list_photos .photo_item img{
+  transition: 0.3s;
+  width: 500px;
+  height: 300px;
+}
+.list_photos .photo_item:hover img{
+  transform: scale(1.2);
 }

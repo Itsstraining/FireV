@@ -36,4 +36,8 @@ export class HomeComponent implements OnInit {
   test() {
     console.log('binh');
   }
+
+  goToPopularPage(){
+    this.router.navigateByUrl('popular');
+  }
 }

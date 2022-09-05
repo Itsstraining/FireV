@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Query, Delete, Req, Res, StreamableFile, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, Delete, Req, Res, StreamableFile, Param, Put } from '@nestjs/common';
 import { createReadStream } from 'fs';
 import { join } from 'path';
 import { AuthService } from 'src/middleware/auth/auth.service';
@@ -17,16 +17,16 @@ export class VideoController {
   }
 
   @Get('play')
-  public async getVideoByid(@Query('id') id: string){
+  public  getVideoByid(@Query('id') id: string){
     console.log(id);
-      return await this.videoService.findByVideoId(id);
+      return this.videoService.findByVideoId(id);
   }
 
   @Get('play/test')
   getFile(@Query('path') path: string): StreamableFile {
-    console.log(path)
+   
     const file = createReadStream(join(process.cwd(), path));
-    console.log(file);
+    console.log(`video was played in this "${file.path}" path`);
     return new StreamableFile(file);
   }
 
@@ -38,5 +38,31 @@ export class VideoController {
   @Get('all/except')
   public async getAllExceptId(@Query('id') id: string){
     return await this.videoService.findAllExceptId(id);
+  }
+
+  @Put('views/path')
+  public async updateVideo(@Query('id') id: string){
+    return await this.videoService.update(id);
+  }
+
+  @Put('likes/path')
+  public async updateLike(@Query('id') id: string, @Req() req: any){
+    // console.log(req.user);
+    return await this.videoService.updateLike(id, req.user);
+  }
+
+  @Put('dislikes/path')
+  public async updateDislike(@Query('id') id: string, @Req() req: any){
+    return await this.videoService.updateDislike(id, req.user);
+  }
+
+  @Put('unlikes/path')
+  public async updateUnlike(@Query('id') id: string, @Req() req: any){
+    return await this.videoService.updateLike(id, req.user);
+  }
+
+  @Put('undislikes/path')
+  public async updateUndislike(@Query('id') id: string, @Req() req: any){
+    return await this.videoService.updateDislike(id, req.user);
   }
 }

@@ -4,10 +4,7 @@
       <div class="home-content">
         <div class="filters">
           <button class="filter-options active">Tất cả</button>
-          <button class="filter-options">Thịnh hành</button>
-          <button class="filter-options">Âm nhạc</button>
-          <button class="filter-options">Phim</button>
-          <button class="filter-options">Bóng đá</button>
+          <button (click)="goToPopularPage()" class="filter-options">Thịnh hành</button>
           <button class="filter-options">Trực tiếp</button>
         </div>
       </div>
@@ -27,7 +24,7 @@
                   <div class=".col">
                     <div class="title-v">
                       <p class="card-title">{{ video.title }}</p>
-                      <p class="card-text">{{ video.author.name }} <br>{{ video.views }} lượt xem - {{video.day}} ngày
+                      <p class="card-text">{{ video.author.name }} <br>{{ video.views }} lượt xem - {{video.timeUp}}
                         trước
                     </div>
                   </div>
@@ -38,3 +35,5 @@
         </div>
       </div>
     </div>
+  </div>
+</div>

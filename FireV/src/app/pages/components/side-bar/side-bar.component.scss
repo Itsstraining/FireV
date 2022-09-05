@@ -65,13 +65,18 @@
 // }
 
 // newwwww
-
+// *{
+//     margin: 0;
+//     padding: 0;
+//     list-style: none;
+//     text-decoration: none;
+// }
 .material-icons {
-    font-size: xx-large;
+    font-size: 26px;
     // padding-left: 40%;
-    vertical-align:sub;
-    padding-right:5%;
-    padding-bottom:5%;
+    // vertical-align:center;
+    // padding-right:10%;
+    padding-bottom:3px;
 }
 
 // .mainBody {
@@ -346,7 +351,7 @@ body {
 }
 
 body {
-    background-color: #283655;
+    background-color: #121f26;
     // padding: 0;
     // margin: 0;
     font-family: "Maven Pro", sans-serif;
@@ -363,7 +368,6 @@ body {
     display: table;
     height: 100%;
     width: 100%;
-    
 }
 
 .mainInner div {
@@ -381,10 +385,13 @@ body {
     position: fixed;
     letter-spacing: 1.15px;
     overflow:visible;
-    left: 0;
-    width: 13%;
-    transform: translateX(-250px);
-    transition: transform 250ms ease-in-out;
+
+    text-align: left;
+    width: 14.5%;
+    // left: -180px;
+    // transform: translateX(-250px);
+    transition: all .5s;
+    left: -170px;
     // background: linear-gradient(180deg, #FC466B 0%, #3F5EFB 100%);
     background: #121f26;
     /* fallback for old browsers / background: -webkit-linear-gradient(to left, #fdbb2d, #b21f1f, #1a2a6c);  / Chrome 10-25, Safari 5.1-6 / background: linear-gradient(to left, #fdbb2d, #b21f1f, #1a2a6c); / W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -403,23 +410,24 @@ body {
     color: #fff;
     text-transform: uppercase;
     // font-weight: bold;
-    padding: 10px;
+    padding: 15px;
     cursor: pointer;
     // border-bottom: 1px solid rgba(255, 255, 255, 0.10);
 }
 .sidebarMenuInner .nav-text {
     // position:relative;
-    font-size: large;
+    font-size: 26px;
     // display:table-cell;
-    padding-top: 3%;
-    width:190px;
+    // padding-top: 3%;
+    width:180px;
     // padding-left: 18%;
     font-family: "Maven Pro", sans-serif;
     }
 .sidebarMenuInner li span {
-    font-size: 15px;
+    font-size: 18px;
     color: white;
-    margin-top: 3%;
+    margin-top: 5%;
+    padding-right:10%;
 }
 
 .sidebarMenuInner li a {
@@ -432,11 +440,17 @@ body {
     cursor: pointer;
     text-decoration: none;
 }
-
+#sidebarMenu ul li:hover a{
+    padding-left: 5%;
+    transition: .4s;
+    font-weight:700;
+}
 .sidebarMenuInner li:hover {
-   
+    font-weight:700;
     color:red;
-   
+    padding-left: 5%;
+    // padding-left: 5%;
+    transition: .4s;
     background: #cb2d3e;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #ef473a, #cb2d3e);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #ef473a, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -446,17 +460,22 @@ body {
 .sidebarMenuInner i:hover {
     color: white;
     opacity:0.85;
+    // transition: all .5s;
+    // padding-right: 5%;
+    padding-left: 5%;
+    transition: .4s;
 }
 
 .sidebarMenuInner a span:hover {
     color: white;
     opacity:1;
     font-weight:700;
-    padding-bottom:5%;
+    padding-left: 5%;
 }
 
 input[type="checkbox"]:checked~#sidebarMenu {
     transform: translateX(0);
+    left: 0;
 }
 
 input[type=checkbox] {
@@ -489,7 +508,7 @@ input[type=checkbox] {
 }
 
 .horizontal {
-    transition: all 0.3s;
+    transition: all .5s;
     box-sizing: border-box;
     position: relative;
     float: left;
@@ -498,13 +517,13 @@ input[type=checkbox] {
 
 .diagonal.part-1 {
     position: relative;
-    transition: all 0.3s;
+    transition: all .5s;
     box-sizing: border-box;
     float: left;
 }
 
 .diagonal.part-2 {
-    transition: all 0.3s;
+    transition: all .5s;
     box-sizing: border-box;
     position: relative;
     float: left;
@@ -512,21 +531,47 @@ input[type=checkbox] {
 }
 
 input[type=checkbox]:checked~.sidebarIconToggle>.horizontal {
-    transition: all 0.3s;
+    transition: all 0.2s;
     box-sizing: border-box;
     opacity: 0;
 }
 
 input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-1 {
-    transition: all 0.3s;
+    transition: all 0.2s;
     box-sizing: border-box;
     transform: rotate(135deg);
     margin-top: 8px;
 }
 
 input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
-    transition: all 0.3s;
+    transition: all 0.2s;
     box-sizing: border-box;
     transform: rotate(-135deg);
     margin-top: -9px;
 }
+.home-body {
+    margin-left: 4rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    // padding-left: 12.5rem;
+  //   background: #bdc3c7;  /* fallback for old browsers */
+  // background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
+  // background: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  background-color: #EEEEEE; 
+  transition: all .5s;
+}
+#openSidebarMenu:checked ~ .home-body{
+    margin-left: 16rem;
+}
+
+#openSidebarMenu:checked ~ #sidebarMenu a span{
+    display: none;
+}
+
+// #openSidebarMenu:checked ~ #sidebarMenu a {
+// //     font-size: 16px;
+// //     margin-left: 185px;
+// //     width: 75px;
+// // }

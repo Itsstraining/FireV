@@ -157,35 +157,39 @@
     <div class="header"></div>
     <input style="text-align:center" type="checkbox" class="openSidebarMenu"
         id="openSidebarMenu">
-    <label style="margin-top:10px" for="openSidebarMenu"
+    <label style="margin-top:10px" id="openSidebarMenu" for="openSidebarMenu"
         class="sidebarIconToggle">
         <div class="spinner diagonal part-1"></div>
         <div class="spinner horizontal"></div>
         <div class="spinner diagonal part-2"></div>
     </label>
-    <div id="sidebarMenu" role="navigation">
+    <div id="sidebarMenu" >
         <ul class="sidebarMenuInner">
-            <li><a (click)="goToHomePage()"><i class="material-icons">home</i>
-                    <span class="nav-text" >Trang Chủ</span>
+            <li> <span class="nav-text" >Trang Chủ</span><a (click)="goToHomePage()"><i style="float:right;" class="material-icons">home</i>
                 </a>
             </li>
             <br>
-            <li><a (click)="goToPopularPage()"><i class="material-icons">local_fire_department</i>
-                    <span class="nav-text" >Thịnh Hành</span>
+            <li><span class="nav-text" >Thịnh Hành</span><a (click)="goToPopularPage()"><i style="float: right;" class="material-icons">local_fire_department</i>
+
                 </a></li>
                 <br>
-            <li><a (click)="goToChannelPage()"><i class="material-icons">subscriptions</i>
-                    <span class="nav-text" >Kênh Của Bạn</span>
+            <li> <span class="nav-text" >Kênh Của Bạn</span><a (click)="goToChannelPage()"><i style="float: right;"class="material-icons">subscriptions</i>
+                   
                 </a></li>
                 <br>
-            <li><a><i class="material-icons">library_add_check</i>
-                    <span class="nav-text" >Kênh Đăng Ký</span>
+            <li><span class="nav-text" >Kênh Đăng Ký</span><a><i style="float: right;" class="material-icons">library_add_check</i>
+                    
                 </a></li>
         </ul>
     </div>
-    <div id='center' class="main center">
+    <!-- <div id='center' class="main center">
         <div class="mainInner">
-            <!-- <div>PURE CSS SIDEBAR TOGGLE MENU</div> -->
+            
         </div>
-    </div>
+    </div> -->
+    <!-- <div class="home-body">
+       
+            <h1>abc</h1>
+        
+    </div> -->
 </div>

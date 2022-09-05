@@ -13,7 +13,10 @@ const initialState: AuthState = {
 export const authReducer = createReducer(
   initialState,
   /////////////////////////////////////////////////////////////
-  on(AuthActions.login, (state) => state),
+  on(AuthActions.login, (state,action) => {
+    console.log(action.type);
+    return state
+  }),
   on(AuthActions.loginSuccess, (state, action) => {
     let newState = {
       ...state,
@@ -34,11 +37,15 @@ export const authReducer = createReducer(
   }),
 
   ////////////////////////////////////////////////////////////////////
-  on(AuthActions.logOut, (state) => state),
+  on(AuthActions.logOut, (state,action) => {
+    console.log(action.type);
+    return state
+  }),
   on(AuthActions.logOutSuccess, (state, action) => {
     let newState = {
       ...state,
       idToken: '',
+      _id: '',
       isAuthenticated: false,
     };
     console.log(action.type);

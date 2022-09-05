@@ -1,7 +1,7 @@
 <div class="row1">
-    <div class="play-video">
+    <div class="play-video" *ngIf="playVideo$|async as videoTest">
         <div class="video">
-            <video controls autoplay>
+            <video controls autoplay (timeupdate)="setCurrentTime($event)">
                 <source *ngIf="(playVideo$|async)?.url"
                 src="http://127.0.0.1:3000/video/play/test?path={{(playVideo$ | async)?.url}}" type="video/mp4">
 
@@ -94,21 +94,23 @@
         <div class="play-video-info">
             <div class="like-share">
                 <div class="sidebar__category">
-                    <i class="material-icons" style="color: #1e1f26" >thumb_up</i>
+                    <i class="material-icons" style="color: #1e1f26"  (click)="updateLike(videoTest._id)" *ngIf="!isLiked">thumb_up</i>
+                    <i class="material-icons" style="color: red"  (click)="updateLike(videoTest._id)" *ngIf="isLiked">thumb_up</i>
                     <br />
-                    <span style="color: #240303;;">{{(playVideo$ | async)?.like}}</span>
+                    <span style="color: #240303;;">{{like}}</span>
                 </div>
                 <div class="sidebar__category">
-                    <i class="material-icons" style="color: #1e1f26" >thumb_down</i>
+                    <i class="material-icons" style="color: #1e1f26" (click)="updateDislike(videoTest._id)" *ngIf="!isDisliked">thumb_down</i>
+                    <i class="material-icons" style="color: red"  (click)="updateDislike(videoTest._id)" *ngIf="isDisliked">thumb_down</i>
                     <br />
-                    <span style="color: #240303;;">{{(playVideo$ | async)?.dislike}}</span>
+                    <span style="color: #240303;;">{{dislike}}</span>
                 </div>
                 <div class="sidebar__category">
                     <i class="material-icons" style="color: #1e1f26" >share</i>
                     <br />
                     <span style="color: #1e1f26;">Chia sẻ</span>
                 </div>
-              
+
             </div>
             <p>{{(playVideo$ | async)?.views}} lượt xem &bull; 29 thg 7, 2022</p>
         </div>

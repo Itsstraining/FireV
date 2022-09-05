@@ -11,6 +11,7 @@ export interface Video{
     dislike: number;
     views: number;
     author: User;
+    timeUp: string;
     createdAt: string;
     hour: number;
     minute: number;
@@ -19,7 +20,8 @@ export interface Video{
     comments: Comment[];
     isHidden: boolean;
     hashtags: string[];
-    likeList: User[];
+    likeList: string[];
+    dislikeList: string[];
     type: string;
 }
 

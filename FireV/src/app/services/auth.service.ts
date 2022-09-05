@@ -7,6 +7,7 @@ import { from } from 'rxjs';
 })
 export class AuthService {
   constructor(private auth: Auth) { }
+  
   login() {
     return from(
       new Promise<string>(async (resolve, reject) => {
@@ -46,6 +47,8 @@ export class AuthService {
             let user = getAuth().currentUser;
             let idToken = await user!.getIdToken(true)
             resolve(idToken);
+          }else{
+            resolve("");
           }
         })
       } catch (err) {

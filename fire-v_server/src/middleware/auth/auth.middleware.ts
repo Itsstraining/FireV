@@ -11,7 +11,7 @@ export class AuthMiddleware implements NestMiddleware {
     let idToken = req.headers['authorization'];
     // console.log(req.headers);
     // console.log(req.headers['authorization']);
-    // console.log(idToken);
+    //console.log(idToken);
 
     if(idToken == undefined){
       res.status(401).send('Unauthorized');

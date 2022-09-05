@@ -11,7 +11,7 @@ export class UserService {
 
   async create(user: any) {
     try{
-      const user_Indb = await this.findOne(user.email);
+      const user_Indb = await this.userModel.findOne({email :user.email});
       // console.log(user_Indb);
       if(!user_Indb){
         const newUser = new this.userModel();
@@ -20,6 +20,9 @@ export class UserService {
         newUser.avatar = user.picture;
         const _user = await newUser.save();
         return _user;
+      }
+      if(user_Indb){
+        console.log(`user with email:${user.email} has just logined `)
       }
     }catch(err){
       console.log(err);
@@ -44,7 +47,7 @@ export class UserService {
         const user =  await this.userModel.findOne({
           email: email
         })
-        return user;
+        return user._id;
       }else{
         return '';
       }
@@ -52,4 +55,6 @@ export class UserService {
       return err;
     }
   }
+
+  
 }

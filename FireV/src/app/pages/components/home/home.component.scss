@@ -1,12 +1,12 @@
 @media only screen and (max-width: 100%) {
   .home-body {
-    background-color: #283655;
+    background-color: #EEEEEE;
   }
   .home_content{
     // background-color:#25223e;
     // opacity: 0.5;
     position: absolute;
-    background-color: #283655;
+    background-color: #EEEEEE;
   }
   .card{
     width: 80%;
@@ -17,65 +17,17 @@
   .col {width: 100%;}
 }
 
-
-
-
-// .mainInner {
-//   display: table;
-//   height: 100%;
-//   width: 100%;
-//   text-align: center;
-// }
-
-// .mainInner div {
-//   display: table-cell;
-//   vertical-align: middle;
-//   font-size: 4em;
-//   font-weight: bold;
-//   letter-spacing: 1.25px;
-// }
-// .home_content .text{
-//     color: #1d1b31;
-// }
-// .main {
-//   position: relative;
-//   padding-left: 10rem;
-//   top: -25px;
-//   width: 100vw;
-// }
-
-// .home-body {
-//   // background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
-//   // background: #355C7D;
-//   // background: -webkit-linear-gradient(to right, #C06C84, #6C5B7B, #355C7D);
-//   // background: linear-gradient(to right, #C06C84, #6C5B7B, #355C7D);
-//   top: 1%;
-//   background-color:#25223e;
-//   padding-left: 5rem;
-//   padding-top: 1rem;
-//   padding-right: 1.5rem;
-//   padding-bottom: 1.5rem;
-//   left: 240px;
-// }
-
-// .home-content {
-//   height: 60px;
-//   overflow: hidden;
-// }
-
 .home-main {
   display: flex;
+  overflow: hidden;
   flex-direction: row;
   flex-wrap: wrap;
-  padding-left: 12.5rem;
+  padding-left: 13.2rem;
 //   background: #bdc3c7;  /* fallback for old browsers */
 // background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
 // background: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-background-color: #909fac;  /* fallback for old browsers */
-
-
-
+background-color: #EEEEEE;  /* fallback for old browsers */
 }
 
 .filters {
@@ -83,11 +35,9 @@ background-color: #909fac;  /* fallback for old browsers */
   height: 50px;
   display: flex;
   align-items: center;
-  padding-left: 13rem;
+  padding-left: 13.8rem;
   padding-top: 1rem;
-  background-color: #909fac;
-
-
+  background-color: #EEEEEE;
 }
 
 .filters::-webkit-scrollbar {
@@ -121,8 +71,8 @@ background-color: #909fac;  /* fallback for old browsers */
 }
 
 .filter-options:not(.active) {
-  background: #ededed;
-  color: rgb(138, 138, 138);
+  background: #DDDDDD;
+  color: #444444;
   // font-weight: bolder;
 }
 
@@ -157,10 +107,11 @@ background-color: #909fac;  /* fallback for old browsers */
   border-radius: 20px;
 }
 
-.col {
-  margin-top: 1rem;
-  margin-left: 3rem;
-}
+// .col-md-auto {
+//   // margin-top: 1rem;
+//   // margin-left: 3rem;
+//   padding:1rem;
+// }
 
 .button-add {
   text-align: end;
@@ -168,23 +119,24 @@ background-color: #909fac;  /* fallback for old browsers */
 }
 
 .card-img-top {
-  height: 150px;
+  height: 100%;
   width: 100%;
-
+  object-fit: fill;
+  border: none;
 }
 
 .image-title {
   width: 100%;
-  height: 280px;
+  height: 100%;
   text-align: center;
 
 }
 
-.card-img-top {
-  width: 18.5rem;
-  height: 180px;
-  object-fit: cover;
-}
+// .card-img-top {
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+// }
 
 .col-md-auto {
   padding-top: 1rem;
@@ -192,7 +144,9 @@ background-color: #909fac;  /* fallback for old browsers */
 
 .card {
   width: 18.5rem;
-  height: 280px;
+  height: 16.5rem;
+  border: none;
+  border-radius:none;
 }
 
 #avatar {

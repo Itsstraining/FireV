@@ -11,6 +11,11 @@ export class UserController {
     return await this.userService.create(req.user);
   }
 
+  @Get('id')
+  getUserId(@Req() req: any){
+    return this.userService.findOne(req.user.email);
+  }
+
   @Get('/')
   public async getUserById(@Query(`id`) id: string) {
     console.log(id);

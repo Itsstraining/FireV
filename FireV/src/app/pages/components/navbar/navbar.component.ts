@@ -23,6 +23,10 @@ export class NavbarComponent implements OnInit {
     private auth: Auth
   ) {
 
+
+  }
+
+  ngOnInit(): void { 
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.idToken$.subscribe((value) => {
@@ -39,8 +43,6 @@ export class NavbarComponent implements OnInit {
       }
     });
   }
-
-  ngOnInit(): void { }
 
   login() {
     this.store.dispatch(AuthActions.login());
