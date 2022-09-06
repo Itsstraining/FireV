@@ -116,6 +116,7 @@
         </div>
         <hr>
         <div class="plublisher">
+            <!-- <img src="../../../../assets/images/avatar1.png"> -->
             <img src="{{(playVideo$ | async)?.author?.avatar}}">
             <div>
                 <p>{{(playVideo$ | async)?.author?.name}}</p>
@@ -140,14 +141,16 @@
                         computer screen, this is the website design that we are going to create in this video.</p>
                     <div class="acomment-action">
                         <div class="sidebar__category">
-                            <i class="material-icons" style="color: #1e1f26" >thumb_up</i>
+                            <i class="material-icons" style="color: #1e1f26"  (click)="updateLike(videoTest._id)" *ngIf="!isLiked">thumb_up</i>
+                            <i class="material-icons" style="color: red"  (click)="updateLike(videoTest._id)" *ngIf="isLiked">thumb_up</i>
                             <br />
-                            <span style="color: #1e1f26;">512</span>
+                            <span style="color: #240303;;">{{like}}</span>
                         </div>
                         <div class="sidebar__category">
-                            <i class="material-icons" style="color: #1e1f26" >thumb_down</i>
-                            <br />
-                            <span style="color: #1e1f26;">12</span>
+                            <i class="material-icons" style="color: #1e1f26" (click)="updateDislike(videoTest._id)" *ngIf="!isDisliked">thumb_down</i>
+                    <i class="material-icons" style="color: red"  (click)="updateDislike(videoTest._id)" *ngIf="isDisliked">thumb_down</i>
+                    <br />
+                    <span style="color: #240303;;">{{dislike}}</span>
                         </div>
                         <span>Phản hồi</span>
                         <!-- <a href="">Tất cả phản hồi</a> -->

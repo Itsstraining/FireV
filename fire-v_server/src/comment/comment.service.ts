@@ -8,7 +8,8 @@ import { Comment, CommentDocument } from 'src/schemas/comment.schema';
 export class CommentService {
     constructor(@InjectModel(Comment.name) private commentModel: Model<CommentDocument>) {}
 
-    async creatComment(comment: Comment) {
+    async creatComment(comment: Comment, videoId: string, email: string) {
+        
         let creatComment = new this.commentModel(comment);
         await creatComment.save();
     }

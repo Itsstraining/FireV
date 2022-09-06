@@ -53,6 +53,8 @@ export class Video {
     @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }] })
     dislikeList: User[];
 
+    
+
 }
 export type VideoDocument = Video & Document;
 export const VideoSchema = SchemaFactory.createForClass(Video);

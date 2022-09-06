@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Query, Param, Req } from '@nestjs/common';
 import { Comment } from 'src/schemas/comment.schema';
 import { CommentService } from './comment.service';
 
@@ -7,9 +7,9 @@ export class CommentController {
 
 
   constructor(private readonly commentService: CommentService) {}
-  @Post('create')
-  public async create(@Body() comment: Comment) {
-    return await this.commentService.creatComment(comment);
+  @Post('create/:id')
+  public async create(@Body() comment: Comment,@Param('id') videoId: string, @Req() req: any) {
+    return await this.commentService.creatComment(comment,videoId,req.user.email);
   }
 
   @Get('all')
