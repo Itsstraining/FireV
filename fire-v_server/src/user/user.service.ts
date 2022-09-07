@@ -56,5 +56,24 @@ export class UserService {
     }
   }
 
+  async updateSubscribers(id: string, email: string) {
+    const findUser = await this.userModel.findOne({_id: id});
+    const user_Indb = await this.userModel.findOne({
+      email: email,
+    }).exec();
+    const idOfUser = user_Indb._id;
+    console.log(idOfUser);
+    console.log(user_Indb.email);
+    if(findUser.subscriberList.includes(user_Indb._id)){
+      const index = findUser.subscriberList.indexOf(idOfUser);
+      findUser.subscriberList.splice(index, 1);
+      findUser.subscribers -= 1;
+    }else{
+      findUser.subscriberList.push(idOfUser);
+      findUser.subscribers += 1;
+    }
+    const tam = await findUser.save();
+    return tam;
+  }
   
 }

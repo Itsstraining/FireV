@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Query, Delete, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, Delete, Req, Put } from '@nestjs/common';
 import { User } from 'src/schemas/user.schema';
 import { UserService } from './user.service';
 
@@ -30,5 +30,9 @@ export class UserController {
   @Delete('/delete')
   public async deleteUser(@Query(`id`) id: string) {
     return await this.userService.deleteUser(id);
+  }
+  @Put('subscribers/path')
+  public async updateSubscribers(@Query(`id`) id: string, @Req() req: any) {
+    return await this.userService.updateSubscribers(id, req.user.email);
   }
 }

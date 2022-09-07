@@ -26,6 +26,7 @@ import { AuthState } from './states/auth.state';
 import * as AuthActions from '../app/actions/auth.action';
 import { videoReducer } from './reducers/video.reducer';
 import { VideoEffect } from './effects/video.effect';
+import { SnackBarComponent } from './pages/components/snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [

@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600;1,700$display=swap');
 *{
-  padding: 0;
-  margin: 0;
-  border: none;
-  outline: none;
-  box-sizing: border-box;
-  cursor: pointer;
+  // padding: 0;
+  // margin: 0;
+  // border: none;
+  // outline: none;
+  // box-sizing: border-box;
+  // cursor: pointer;
   list-style: none;
   text-decoration: none;
 }
@@ -19,17 +19,17 @@
 body{
   overflow: hidden;
   min-height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: "Maven Pro", sans-serif;
 }
 
 #profile{
-  width: 1440px;
+  width: 100%;
   min-height: 600px;
   margin: 0px auto;
   margin-top: 10px;
 }
 .header{
-  min-width: 500px;
+  width: 100%;
   min-height: 300px;
   background: url("https://www.desktopbackground.org/p/2015/06/06/960068_best-10-wallpaper-nature-hd-pictures-image-gallery_4000x2236_h.jpg");
   display: flex;
@@ -43,13 +43,25 @@ body{
   text-decoration: uppercase;
   text-shadow: 0px 4px 4px rgba(255,0,0,0.25)
 }
-
+.container1{
+  // padding-left: 4.5%;
+  height: 100vh;
+  width: 90%;
+  margin-left: 9.5%;
+  padding-right: 2%;
+  padding-bottom: 20px;
+}
+.large-container{
+  height: 100%;
+  padding-right: 0%;
+  padding-bottom: 20px;
+}
 /**/
 main{
   display: flex;
 }
 .content_left{
-  width: 40%;
+  width: 600px;
   padding-bottom: 40px;
 }
 
@@ -68,13 +80,13 @@ main{
 .user_name{
   text-align:center;
   font-size:40px;
-  color: #677179;
+  color: black;
   font-weight:bold;
   text-transform: uppercase;
 }
 .user_position{
   text-align: center;
-  color: #677179;
+  color: black;
 }
 .user_analysis{
   width: 330px;
@@ -84,46 +96,57 @@ main{
   justify-content: space-between;
   align-items:center;
   padding-bottom: 30px;
-  border-bottom: 1px solid red;
+  border-bottom: 1.5px solid #121f26;
   // min-height: 75px
 }
 .user_analysis .item{
   text-align: center;
-  color: #677179;
+  color: black;
   font-weight:bold;
 }
 
 .user_desc{
-  margin-top: 25px;
+  margin-top: 40px;
+  width: 555px;
+  padding-left: 90px;
+  text-align: justify;
+  text-justify: inter-word;
   line-height: 30px;
   letter-spacing: 0.04rem;
-  color: var(#B5BDD1);
+  color: black;
 
 }
-.btn_connect{
+.btn_follow{
   width: 240px;
-  height: 55px;
+  height: 45px;
   color: var(#ffffff);
-  background: var(#677179);
+  background: red;
   display: flex;
+  color:white;
+  font-size:large;
   align-items: center;
   justify-content: center;
   margin: 0px auto;
-  margin-top: 50px;
-  border-radius: 5px;
+  margin-top: 30px;
+  border-radius: 50px;
+  border:none;
 }
 
 .content_right{
-  width: 60%;
-  padding: 90px 60px;
+  width: 840px;
+  padding-top: 30px ;
+  padding-left: 20px;
+  
 }
 .content_header{
+  
   display:flex;
   justify-content: space-between;
   align-items: center;
 }
 .content_menu{
   display:flex;
+  font-size: 20px;
   gap: 70px;
 }
 .content_menu .link:first-child a{
@@ -140,7 +163,7 @@ main{
 .btn_follow{
   width:120px;
   height:40px;
-  background: #0C8AFF;
+  background: red;
   color: #ffffff;
   border-radius: 5px;
 }
@@ -159,17 +182,68 @@ main{
 
 }
 .list_photos .photo_item{
-  width: 500px;
-  height: 300px;
-  overflow: hidden;
-  margin-bottom: 35px;
+  // width: 500px;
+  // height: 300px;
+  // overflow: hidden;
+  // margin-bottom: 35px;
   border-radius: 5px;
 }
 .list_photos .photo_item img{
   transition: 0.3s;
   width: 500px;
-  height: 300px;
+  // height: 10px;
 }
 .list_photos .photo_item:hover img{
   transform: scale(1.2);
+}
+.side-video-list {
+  // margin-left: 10%;
+  width: 80%;
+  margin-bottom: 0ex;
+  padding-bottom: 0ex;
+  display: flex;
+  // align-items: center;
+}
+.image {
+  width: 500px;
+  height: 250px;
+
+}
+
+.image img {
+  width: 350px;
+  height: 230px;
+}
+
+.vid-info {
+  width: 450px;
+  margin-left: 2%;
+  float: right;
+  flex-basis: 90%;
+  // padding-bottom: 11%;
+}
+
+.vid-info h1 {
+  font-size: 2.5ex;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  color: #1e1f26;
+}
+.vid-info p{
+  margin-top: 10px;
+  color: #1e1f26;
+}
+.content_bottom{
+  margin-top:20px;
+}
+
+
+@media (max-width: 770px ){
+  main {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+  }
 }

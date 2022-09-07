@@ -34,7 +34,8 @@
 <nav class="flex-div">
     <div class="nav-left flex-div">
         <!-- <i id="menu" class="material-icons" style="cursor:pointer;">menu</i> -->
-        <img (click)="home()" src="../../../assets/images/LogoFirerV.png" alt="logo icon" class="logo">
+        <img (click)="home()" src="../../../assets/images/LogoFirerV.png"
+            alt="logo icon" class="logo">
     </div>
     <div class="nav-middle flex-div">
         <div class="search-box flex-div">
@@ -42,25 +43,53 @@
             <i class="material-icons" style="cursor:pointer;">search</i>
             <!-- <img src="../../../assets/images/search.png" alt="search-icon"> -->
         </div>
+        <div class="mic-icon">
+            <i class="fa fa-microphone" aria-hidden="true"></i>
+        </div>
+
+        <!-- <div class = "vid-icon">
+        <i style="margin-left:5%" class="fa fa-video-camera" aria-hidden="true"> 
+        </i> -->
+        <!-- <img src="../../../assets/images/search.png" alt="search-icon"> -->
         <!-- <img src="../../../assets/images/voice-search.png" alt="" class="mic-icon"> -->
     </div>
     <div class="nav-right flex-div">
+        <button (click)="goToAdd()"
+            style="color:white;
+            margin-right:28px;
+            width: 100%;
+            padding-left: 10px;
+            padding-right: 10px;
+            height: 35px;
+            color: black;
+            border-radius:50px;
+            font-size:large;
+            text-align: center">
+            <i class="fa fa-video-camera"
+                style="
+                font-size:15px;
+                color: black;
+                "> </i></button>
         <div class="action">
             <div class="profile" *ngIf="!displayName">
-                <img style="background: white"src="../../../../../../../assets/images/user.png" alt="ava" class="user-icon" (click)="login()">
+                <img style="background: white"
+                    src="../../../../../../../assets/images/user.png" alt="ava"
+                    class="user-icon" (click)="login()">
             </div>
             <div class="profile" *ngIf="displayName">
-                <img (error)="handleError($event)" src="{{photoURL}}" alt="ava" class="user-icon" (click)="toggleShow()">
+                <img (error)="handleError($event)" src="{{photoURL}}" alt="ava"
+                    class="user-icon" (click)="toggleShow()">
             </div>
             <div class="menu" *ngIf="isShown" (click)="toggleShow()">
-                <h3>{{displayName}}<br><span>Special Guys</span></h3>
+                <h3 (click)="goToChannel()" > {{displayName}}<br><span>Special Guys</span></h3>
                 <ul>
                     <!-- <li ><img src="../../../assets/images/user.png" alt=""><a>Your Channel</a></li>
                     <li ><img src="../../../assets/images/edit.png" alt=""><a (click)="toggleShow()">Add Video</a></li>
                     <li><img src="../../../assets/images/inbox.png" alt=""><a>Inbox</a></li>
                     <li><img src="../../../assets/images/setting.png" alt=""><a>Settings</a></li>
                     <li><img src="../../../assets/images/help.png" alt=""><a>Help</a></li> -->
-                    <li (click)="logout()"><img src="../../../assets/images/logout.png" alt=""><a>Logout</a></li>
+                    <li (click)="logout()"><img
+                            src="../../../assets/images/logout.png" alt=""><a>Logout</a></li>
                 </ul>
             </div>
         </div>

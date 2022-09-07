@@ -1,76 +1,8 @@
-// // .body-pro{
-// //   width: 100%;
-// //   display: inline-flex;
-// // }
-// .mainBody {
-//     height: calc(100vh - 70px);
-//     display: flex;
-//     overflow: hidden;
-//     float: left;
-// }
 
-// .material-icons {
-//     font-size: xx-large;
-// }
 
-// // .main-content{
-// //   width: 90%;
-// //   background-color: aquamarine;
-// // }
-// .sidebar {
-//     height: 100vh;
-//     width: 120px;
-//     background-color: white;
-//     overflow-y: scroll;
-//     border-right: 1px solid #e5e5e5;
-//     position: fixed;
-//     top: 80px;
-// }
 
-// .sidebar__categories {
-//     height: 100%;
-//     width: 100%;
-//     display: flex;
-//     flex-direction: column;
-// }
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
 
-// .sidebar__category {
-//     // display: flex;
-//     font-size: 12px;
-//     align-items: center;
-//     text-align: center;
-//     padding: 12px 10px;
-//     margin-bottom: 15px;
-//     margin-top: 15px;
-// }
-
-// .sidebar__category span {
-//     font-size: 15px;
-// }
-
-// .sidebar__category:hover {
-//     // background: rgb(189, 186, 186);
-//     font-weight: bold;
-//     cursor: pointer;
-// }
-
-// .sidebar::-webkit-scrollbar {
-//     display: none;
-// }
-
-// hr {
-//     height: 1px;
-//     background-color: #e5e5e5;
-//     border: none;
-// }
-
-// newwwww
-// *{
-//     margin: 0;
-//     padding: 0;
-//     list-style: none;
-//     text-decoration: none;
-// }
 .material-icons {
     font-size: 26px;
     // padding-left: 40%;
@@ -78,271 +10,6 @@
     // padding-right:10%;
     padding-bottom:3px;
 }
-
-// .mainBody {
-//     height: calc(100vh - 70px);
-//     display: flex;
-//     float: left;
-//     margin-left: 10%;
-//     background-color: var(--body-color);
-//     transition: var(--tran-05);
-//     position: fixed;
-//     height: 100%;
-//     overflow: auto;
-// }
-// .sidebar{
-//     // border-radius: 10px;
-
-//     position: fixed;
-//     top:80px;
-//     left:0;
-//     height: 100%;
-//     width: 14%;
-//     background-color: #25223e;
-//     padding: 6px 6px;
-
-// }
-// .sidebar .menu{
-//     color: #fff;
-//     display: flex;
-//     height: 50px;
-//     width: 100%;
-//     align-items: center;
-// }
-// .menu i{
-//     font-size: 30px;
-//     margin-left: 5%;
-// }
-// .sidebar ul {
-//     margin-top: 20px;
-// }
-// .sidebar ul li{
-//     position: relative;
-//     height: 50px;
-//     width: 100%;
-//     list-style: none;
-
-// }
-// .sidebar ul li input{
-//     position: absolute;
-//     height: 100%;
-//     width: 100%;
-//     left: 0;
-//     top: 0;
-//     border-radius: 12px;
-//     outline: none;
-//     border: none;
-//     background: #1d1b31;
-//     padding-left: 50px;    
-//     font-size: 18px;
-//     color: #fff;
-// }
-// .sidebar ul li a{
-//     color: #fff;
-//     display: flex;
-//     align-items: center;
-//     text-decoration: none;
-//     transition: all 0.4s ease;
-//     border-radius: 20px;
-// }
-// .sidebar ul li a:hover{
-//     color:  white;
-
-//     // background: #fff;
-//     // background: #72339c;  /* fallback for old browsers */
-//     // background: -webkit-linear-gradient(to right, #fcb045,#fd1d1d, #72339c);  /* Chrome 10-25, Safari 5.1-6 */
-//     // background: linear-gradient(to left, #fd1d1d, #fcb045, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-//     background: #1a2a6c;  /* fallback for old browsers */
-// background: -webkit-linear-gradient(to left, #fdbb2d, #b21f1f, #1a2a6c);  /* Chrome 10-25, Safari 5.1-6 */
-// background: linear-gradient(to left, #fdbb2d, #b21f1f, #1a2a6c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-
-// //     background: #8A2387;  /* fallback for old browsers */
-// // background: -webkit-linear-gradient(to left, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
-// // background: linear-gradient(to left, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-// // background: #D38312;  /* fallback for old browsers */
-// // background: -webkit-linear-gradient(to left, #A83279, #D38312);  /* Chrome 10-25, Safari 5.1-6 */
-// // background: linear-gradient(to left, #A83279, #D38312); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-
-// }
-// .sidebar ul li a i{
-//     height: 55px;
-//     min-width: 50px;
-//     border-radius: 12px;
-//     line-height: 50px;
-//     text-align: center;
-// }
-
-// .home_content{
-//     position: absolute;
-//     height: 100%;
-//     width: calc(100% - 240px);
-//     left: 240px;
-// }
-// .home_content .text{
-//     font-size: 15px;
-//     font-weight: 200;
-//     color: #1d1b31;
-//     margin: 12px;
-// }
-
-// @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-
-// @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
-// .fa-2x {
-// font-size: 2em;
-// }
-// .fa {
-// position: relative;
-// display: table-cell;
-// width: 60px;
-// height: 36px;
-// text-align: center;
-// vertical-align: middle;
-// font-size:20px;
-// }
-
-
-// .main-menu:hover,nav.main-menu.expanded {
-// width:230px;
-// overflow:visible;
-// }
-
-// .main-menu {
-// position: fixed;
-// top:80px;
-// transition: var(--tran-05);
-// height:100%;
-// display: flex;
-// background:#25223e;
-// // position:absolute;
-// bottom:0;
-// // height:100%;
-// left:0;
-// width:60px;
-// overflow:visible;
-// --webkit-transition:width 0.2s linear;
-// transition:width 0.2s linear;
-// --webkit-transform:translateZ(0) scale(1,1);
-// z-index:1000;
-// }
-
-// // .main-menu>ul {
-// // margin:7px 0;
-// // }
-
-// .main-menu li {
-// border-radius: 20px;
-// position:relative;
-// display:block;
-// width:250px;
-
-// }
-
-// .main-menu li>a {  
-// height: 40px;
-// position:relative;
-// display:table;
-// border-collapse:collapse;
-// border-spacing:0;
-// color:white;
-// font-size: 12px;
-// text-decoration:none;
-// -webkit-transform:translateZ(0) scale(1,1);
-// -webkit-transition:all 0.4s linear;
-// transition:all 0.4s linear;
-
-// }
-
-// .main-menu .nav-icon {
-// position:relative;
-// display:table-cell;
-// width:60px;
-// height:36px;
-// text-align:center;
-// vertical-align:middle;
-// font-size: large;
-// }
-
-// .main-menu .nav-text {
-// position:relative;
-// font-size: large;
-// display:table-cell;
-// vertical-align:middle;
-// width:190px;
-// padding-left: 18%;
-// font-family: "Maven Pro", sans-serif;
-// }
-
-// .main-menu>ul.logout {
-// position:absolute;
-// left:0;
-// bottom:0;
-// }
-
-// .no-touch .scrollable.hover {
-// overflow-y:hidden;
-// }
-
-// .no-touch .scrollable.hover:hover {
-// overflow-y:auto;
-// overflow:visible;
-// }
-
-// a:hover,a:focus {
-// text-decoration:none;
-// }
-
-// nav {
-// -webkit-user-select:none;
-// -moz-user-select:none;
-// -ms-user-select:none;
-// -o-user-select:none;
-// user-select:none;
-// }
-
-// nav ul,nav li {
-// outline:0;
-// margin:0;
-// padding:0;
-// }
-// .main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
-//     margin-left: 3%;
-//     color:white;
-// border-radius: 20px;
-// background: #1a2a6c;  /* fallback for old browsers */
-// background: -webkit-linear-gradient(to left, #fdbb2d, #b21f1f, #1a2a6c);  /* Chrome 10-25, Safari 5.1-6 */
-// background: linear-gradient(to left, #fdbb2d, #b21f1f, #1a2a6c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-// }
-
-// @font-face {
-//     font-family: "Maven Pro", sans-serif;
-//   font-style: normal;
-//   font-weight: 300;
-//   src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
-// }
-// .home_content{
-//     // background-color:#25223e;
-//     // opacity: 0.5;
-//     position: absolute;
-//     height: 100%;
-//     width: calc(100% - 240px);
-//     left: 15%;
-// }
-// .home_content .text{
-//     font-size: 15px;
-//     font-weight: 200;
-//     color: #1d1b31;
-//     margin: 12px;
-// }
-
-@import url('https://fonts.googleapis.com/css?family=Varela+Round');
 
 html,
 body {
@@ -360,7 +27,7 @@ body {
 .main {
     position: fixed;
     display: block;
-    height: 100%;
+    height: 100vh;
     margin-top: 60px;
 }
 
@@ -388,13 +55,12 @@ body {
 
     text-align: left;
     width: 14.5%;
-    // left: -180px;
-    // transform: translateX(-250px);
+   
     transition: all .5s;
     left: -170px;
-    // background: linear-gradient(180deg, #FC466B 0%, #3F5EFB 100%);
+   
     background: #121f26;
-    /* fallback for old browsers / background: -webkit-linear-gradient(to left, #fdbb2d, #b21f1f, #1a2a6c);  / Chrome 10-25, Safari 5.1-6 / background: linear-gradient(to left, #fdbb2d, #b21f1f, #1a2a6c); / W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   
 }
 
 .sidebarMenuInner {
@@ -409,6 +75,7 @@ body {
     list-style: none;
     color: #fff;
     text-transform: uppercase;
+
     // font-weight: bold;
     padding: 15px;
     cursor: pointer;
@@ -425,7 +92,7 @@ body {
     }
 .sidebarMenuInner li span {
     font-size: 18px;
-    color: white;
+    // color: white;
     margin-top: 5%;
     padding-right:10%;
 }
@@ -434,21 +101,21 @@ body {
     padding-bottom: 2%;
     position: relative;
     font-family: "Maven Pro", sans-serif;
-    color: #fff;
+    // color: #fff;
     text-transform: uppercase;
-    // font-weight: bold;
+    // font-weight:800;
     cursor: pointer;
     text-decoration: none;
 }
 #sidebarMenu ul li:hover a{
-    padding-left: 5%;
     transition: .4s;
-    font-weight:700;
+    font-weight:800;
+    color:rgb(52, 52, 84);
 }
 .sidebarMenuInner li:hover {
-    font-weight:700;
-    color:red;
-    padding-left: 5%;
+    color:rgb(52, 52, 84);
+    font-weight:800;
+    // padding-left: 5%;
     // padding-left: 5%;
     transition: .4s;
     background: #cb2d3e;  /* fallback for old browsers */
@@ -458,19 +125,16 @@ body {
 }
 
 .sidebarMenuInner i:hover {
-    color: white;
-    opacity:0.85;
+    color:rgb(52, 52, 84);
+    font-weight:800;
     // transition: all .5s;
     // padding-right: 5%;
-    padding-left: 5%;
     transition: .4s;
 }
 
 .sidebarMenuInner a span:hover {
-    color: white;
-    opacity:1;
-    font-weight:700;
-    padding-left: 5%;
+    font-weight:800;
+    color:rgb(52, 52, 84);
 }
 
 input[type="checkbox"]:checked~#sidebarMenu {
@@ -554,11 +218,6 @@ input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    // padding-left: 12.5rem;
-  //   background: #bdc3c7;  /* fallback for old browsers */
-  // background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
-  // background: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
   background-color: #EEEEEE; 
   transition: all .5s;
 }
@@ -566,12 +225,16 @@ input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
     margin-left: 16rem;
 }
 
-#openSidebarMenu:checked ~ #sidebarMenu a span{
-    display: none;
-}
+// #openSidebarMenu:checked ~ #sidebarMenu a span{
+//     display: none;
+// }
 
-// #openSidebarMenu:checked ~ #sidebarMenu a {
-// //     font-size: 16px;
-// //     margin-left: 185px;
-// //     width: 75px;
-// // }
+
+@media (max-width: 420px) {
+    .sidebarMenuInner li .nav-text{
+      display: none;
+    }
+    .sidebarMenuInner li:hover {
+        height: 8%;
+    }
+}

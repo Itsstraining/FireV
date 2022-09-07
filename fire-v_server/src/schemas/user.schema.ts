@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { IsEmail, IsNotEmpty } from 'class-validator';
 
 @Schema({
@@ -18,6 +18,9 @@ export class User {
 
   @Prop({ default: 0 })
   subscribers: number;
+
+  @Prop()
+  subscriberList: string[];
 
   @IsEmail()
   @Prop()

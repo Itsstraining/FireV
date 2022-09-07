@@ -6,28 +6,33 @@
       <form [formGroup]="form" (submit)="addData()">
 
         <label for="title">Tiêu đề (bắt buộc)</label>
-        <input type="text" class="form-control" id="title" placeholder="Tiêu đề của bạn?" formControlName="title">
+        <input type="text" class="form-control" id="title" placeholder="Tiêu đề
+          của bạn?" formControlName="title">
 
         <label for="description">Mô tả</label>
-        <textarea type="text" class="form-control" id="description" placeholder="Miêu tả của bạn?"
+        <textarea type="text" class="form-control" id="description"
+          placeholder="Miêu tả của bạn?"
           formControlName="description"></textarea>
 
         <div class="row">
           <div class="col-4">
             <label for="video-file">Chọn video </label>
-            <input type="file" class="form-control-file" id="video-file" (change)="selectVideo($event)"
+            <input type="file" class="form-control-file" id="video-file"
+              (change)="selectVideo($event)"
               accept="video/*" />
           </div>
           <div class="col-4">
             <label for="image-file">Chọn ảnh </label>
-            <input type="file" class="form-control-file" id="image-file" (change)="selectFile($event)"
+            <input type="file" class="form-control-file" id="image-file"
+              (change)="selectFile($event)"
               accept="image/*" />
           </div>
         </div>
 
         <label for="title-content">Chủ đề tùy chỉnh:</label>
         <br />
-        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="title-content"
+        <select class="form-select form-select-lg mb-3"
+          aria-label=".form-select-lg example" id="title-content"
           formControlName="type">
           <option selected>Chọn chủ đề</option>
           <option value="Âm nhạc">Âm nhạc</option>
@@ -41,7 +46,8 @@
 
         <label for="state">Chế độ hiển thị</label>
         <br />
-        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="state"
+        <select class="form-select form-select-lg mb-3"
+          aria-label=".form-select-lg example" id="state"
           formControlName="isHidden">
           <option value="false" selected>Công khai</option>
           <option value="true">Không công khai</option>
@@ -49,7 +55,8 @@
         <br />
 
         <label for="hashtags">Hashtags (nếu có)</label>
-        <input type="text" class="form-control" id="title" formControlName="hashtags">
+        <input type="text" class="form-control" id="title"
+          formControlName="hashtags">
 
         <br />
         <!-- <div class="progress">
@@ -59,12 +66,13 @@
           </div>
         </div>
         <br /> -->
-
         <div class="row">
-          <button [disabled]="!form.valid || isUploading == true" type="submit" class="btn btn-primary">
+          <button [disabled]="!form.valid || isUploading == true" type="submit"
+            class="btn btn-primary">
             Đăng tải
           </button>
-          <button type="button" class="btn btn-outline-danger" (click)="backToChannel()">
+          <button type="button" class="btn btn-outline-danger"
+            (click)="backToChannel()">
             Hủy
           </button>
         </div>

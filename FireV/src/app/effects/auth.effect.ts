@@ -48,4 +48,11 @@ export class AuthEffects {
     catchError(error => of(AuthActions.createUserFailure({ error: error }))),
   ))
 
+  updateSubEffect = createEffect(() => this.action$.pipe(
+    ofType(AuthActions.updateSub),
+    switchMap((action) => this.userService.updateSubcribers(action.id, action.idToken)),
+    map((user) => AuthActions.updateSubSuccess({ user })),
+    catchError(error => of(AuthActions.updateSubFailure({ error: error }))),
+  ))
+
 }

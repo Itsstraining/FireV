@@ -1,15 +1,13 @@
 .add-video {
     position: relative;
-    top: -10px;
+    top: 10px;
     // left: 0px;
-    width: 100%;
+    width: 100vw;
     overflow: hidden;
-    background: #8e9eab;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    padding-left: 10rem;
+    background: #f9f9f9;  /* fallback for old browsers */
+    padding-left: 100px;
     padding-top: 1rem;
-    padding-bottom: 2.5rem;
+
 }
 
 .card-title {
@@ -17,8 +15,11 @@
 }
 
 .card {
-    width: 90%;
-    margin-left: 1rem;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .form-control {

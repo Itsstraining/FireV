@@ -1,3 +1,21 @@
+<!-- <div class="sidenav">
+    <div class="logo-container">
+        <button class="btn-close"></button>
+    </div>
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item">
+            <a href="" class="sidenav-nav-link">
+                <i class="sidenav-link-icon">
+                    <span class="sidenav-link-text">
+
+                    </span>
+                </i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+-->
 <!-- <div class="mainBody">
      Sidebar Starts 
     <div class="sidebar">
@@ -154,42 +172,51 @@
       </div>
     </div> -->
 <div class="mainBody">
-    <div class="header"></div>
     <input style="text-align:center" type="checkbox" class="openSidebarMenu"
         id="openSidebarMenu">
     <label style="margin-top:10px" id="openSidebarMenu" for="openSidebarMenu"
-        class="sidebarIconToggle">
+        class="sidebarIconToggle" (click)="turnMenu()">
         <div class="spinner diagonal part-1"></div>
         <div class="spinner horizontal"></div>
         <div class="spinner diagonal part-2"></div>
     </label>
-    <div id="sidebarMenu" >
+    <div id="sidebarMenu">
         <ul class="sidebarMenuInner">
-            <li> <span class="nav-text" >Trang Chủ</span><a (click)="goToHomePage()"><i style="float:right;" class="material-icons">home</i>
+            <li> <span (click)="goToPopularPage()" class="nav-text">Trang Chủ</span><a
+                    (click)="goToHomePage()"><i style="float:right;"
+                        class="material-icons">home</i>
                 </a>
             </li>
             <br>
-            <li><span class="nav-text" >Thịnh Hành</span><a (click)="goToPopularPage()"><i style="float: right;" class="material-icons">local_fire_department</i>
+            <li><span (click)="goToPopularPage()" class="nav-text">Thịnh Hành</span><a
+                    (click)="goToPopularPage()"><i style="float: right;"
+                        class="material-icons">local_fire_department</i>
 
                 </a></li>
-                <br>
-            <li> <span class="nav-text" >Kênh Của Bạn</span><a (click)="goToChannelPage()"><i style="float: right;"class="material-icons">subscriptions</i>
-                   
+            <br>
+            <li> <span (click)="goToPopularPage()" class="nav-text">Kênh Của Bạn</span><a
+                    (click)="goToChannelPage()"><i style="float: right;"
+                        class="material-icons">subscriptions</i>
+
                 </a></li>
-                <br>
-            <li><span class="nav-text" >Kênh Đăng Ký</span><a><i style="float: right;" class="material-icons">library_add_check</i>
-                    
+            <br>
+            <li><span (click)="goToPopularPage()" class="nav-text">Kênh Đăng Ký</span><a><i style="float:
+                        right;" class="material-icons">library_add_check</i>
                 </a></li>
         </ul>
     </div>
-    <!-- <div id='center' class="main center">
-        <div class="mainInner">
-            
-        </div>
-    </div> -->
-    <!-- <div class="home-body">
-       
-            <h1>abc</h1>
-        
-    </div> -->
 </div>
+<!-- <div class="content_right">
+            <h1>aaaaa</h1>
+        </div> -->
+<!-- <div id='center' class="main center">
+            <div class="mainInner">
+                
+            </div>
+        </div> -->
+<!-- <div class="home-body">
+           
+                <h1>abc</h1>
+            
+    
+            </div> -->

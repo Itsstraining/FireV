@@ -3,202 +3,6 @@
     align-items: center;
 }
 
-// .header {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     height: 70px;
-//     padding: 15px;
-//     background: white;
-// }
-
-
-// .header__left {
-//     display: flex;
-//     align-items: center;
-//     padding-left: 15px;
-
-// }
-
-// .header__left img {
-//     width: 100px;
-//     margin-right: 30px;
-//     margin-top: 10px;
-//     margin-left: 30px;
-// }
-
-// .header i {
-//     padding: 0 7px;
-//     cursor: pointer;
-// }
-
-// .header__search form {
-//     border: 1px solid #ddd;
-//     border-radius: 55px;
-//     height: 35px;
-//     margin: 0;
-//     padding: 0;
-//     display: flex;
-// }
-
-// .header__icons {
-//     display: flex;
-//   flex-direction: row;
-// }
-
-// .rounded-circle {
-//     margin-top: 10px;
-//     width: 30px;
-//     height: 30px;
-// }
-
-// .button-add {
-//     text-align: end;
-//     margin-right: 2rem;
-// }
-
-// .name-user {
-//     margin-top: 13px;
-//     margin-left: 10px;
-// }
-
-// .header__search input {
-//     width: 500px;
-//     padding: 10px;
-//     border-radius: 55px;
-//     margin: 0;
-
-//     border: none;
-//     height: 100%;
-// }
-
-// .header__search button {
-//     padding: 0;
-//     border: none;
-//     border-radius: 55px;
-//     margin: 0;
-//     height: 100%;
-//     background-color: white;
-// }
-
-// .form-control-dark {
-//     border-color: var(--bs-gray);
-// }
-
-// .form-control-dark:focus {
-//     border-color: #fff;
-//     box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
-// }
-
-// .text-small {
-//     font-size: 85%;
-// }
-
-// .dropdown-toggle {
-//     outline: 0;
-// }
-
-// .btn-new {
-//     background-color: #FF3333;
-//     border: none;
-//     border-radius: 6px;
-//     font-size: 17px;
-//     line-height: 48px;
-//     padding: 0 16px;
-//     color: #ffffff;
-//     font-weight: 700;
-//     margin-top: 20px;
-// }
-
-
-// /* Nút Dropdown*/
-
-// .nut_dropdown {
-//     background-color: #0080ff;
-//     color: white;
-//     padding: 16px;
-//     font-size: 16px;
-//     border: none;
-// }
-
-
-// /* Thiết lập vị trí cho thẻ div với class dropdown*/
-
-// .dropdown {
-//     position: relative;
-//     display: inline-block;
-// }
-
-
-// /* Nội dung Dropdown */
-
-// .noidung_dropdown {
-//     /*Ẩn nội dụng các đường dẫn*/
-//     display: none;
-//     position: absolute;
-//     background-color: #f1f1f1;
-//     min-width: 160px;
-//     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-//     z-index: 1;
-// }
-
-
-// /* Thiết kế style cho các đường dẫn tronng Dropdown */
-
-// .noidung_dropdown a {
-//     color: black;
-//     padding: 12px 16px;
-//     text-decoration: none;
-//     display: block;
-// }
-
-
-// /* thay đổi màu background khi hover vào đường dẫn */
-
-// .noidung_dropdown a:hover {
-//     background-color: #ddd;
-// }
-
-
-// /* hiển thị nội dung dropdown khi hover */
-
-// .dropdown:hover .noidung_dropdown {
-//     display: block;
-// }
-
-
-// /* Thay đổi màu background cho nút khi được hover */
-
-// .dropdown:hover .nut_dropdown {
-//     background-color: #00bfff;
-// }
-
-
-// /*Dùng Để hiển thị nội dung*/
-
-// .hienThi {
-//     display: block;
-// }
-
-// @media (max-width: 900px){
-//     .header__left .material-icons{
-//         display: none;
-//     } 
-//     .dropdown img{
-//         display: none;
-//     }
-//     .dropdown .noidung_dropdown{
-//         display: block;
-//         width: 30px;
-//     }
-//     .header__search {
-//         //display: none;
-//         width: 300px;
-//     }
-//     .header__left img{
-//         width: 80px;
-//     }
-// }
 
 .flex-div{
     display: flex;
@@ -206,15 +10,18 @@
 }
 
 nav{
-    padding: 10px;
     justify-content: space-between;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     background: #121f26;
-    position: fixed;
     width: 100vw;
     top: 0;
     z-index: 10;
     height: 80px;
+    position: absolute;
+    // position: fixed;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
 }
 
 .nav-right{
@@ -224,31 +31,26 @@ nav{
         right:15px;
     }
     .action .profile{
-        // position: relative;
-        // width: 60px;
-        // height: 60px;
-        // border-radius: 50%;
         overflow: hidden;
-        // cursor: pointer;
     }
     .action .profile img{
-        // position: absolute;
-        // top: 0;
-        // left: 0;
         object-fit: cover;
     }
     .action .menu{
         box-shadow: 5px 5px 5px #888888;
-        position: absolute;
-        top: 60px;
-        right: -10px;
-        padding: 10px 20px 0px 20px;
+        position: fixed;
+        top: 80px;
+        right: -5px;
+        padding: 10px 10px 0px 10px;
         background: whitesmoke;
         width: 200px;
         box-sizing: 0 5px 25px rgba(0,0,0,1);
         border-radius: 15px;
         transition: 0.5s;
         visibility: visible;
+        opacity: 0.8;
+    }
+    .action .menu:hover {
         opacity: 1;
     }
     .action .menu::before{
@@ -309,40 +111,65 @@ nav{
 }
 
 
-.nav-right img{
-    width: 25px;
-    margin-right: 25px;
-}
+// .nav-right img{
+//     width: 25px;
+//     margin-right: 25px;
+// }
 
 .nav-right .user-icon{
-    width: 35px;
+    width: 50px;
     border-radius: 50%;
-    margin-left: 0;
+    // margin-left: 90%;
 }
 
 .nav-left .menu-icon{
-    width: 22px;
+    width: 90px;
     margin-right: 25px;
 }
 
 .nav-left .logo{
-    width: 120px;
-    margin-left: 30%;
+    width: 100px;
+    margin-left: 45px;
 }
 
 .nav-middle .mic-icon{
-    width: 16px;
+    font-size:x-large;
+    color:white;
 }
 
+.nav-middle .vid-icon{
+    background: white;
+    width: 120px;
+    height: 35px;
+    border-radius: 20px;
+    font-size:x-large;
+    // position: fixed;
+    color:black;
+    right: 80px;
+    display: flex;
+    align-items:center;
+}
+
+// .nav-middle .vid-icon p{
+//     list-style: none;
+//     color:black;
+//     cursor: pointer;
+//     font-size: 16px;
+//     text-decoration: none;
+//     // position: fixed;
+//     align-items:center;
+//     margin-top:15.5px;
+//     margin-left: 35px;
+// }
 .nav-middle .search-box{
     border: 1px solid #ccc;
-    margin-right: 10%;
+    margin-right: 4%;
     padding: 8px 12px;
     border-radius: 25px; 
 }
 
 .nav-middle .search-box input{
-    width: 50rem;
+    width: 100%;
     border: 0;
     outline: 0;
     background: transparent;
@@ -354,26 +181,33 @@ nav{
 
 
 
-@media (max-width: 100%){
-    .menu-icon{
-        display: none;
-    }
-    .nav-right img{
-        display: none;
-    }
-    .nav-right .user-icon{
-        display: block;
-        width: 30px;
-    }
-    .nav-middle .search-box input{
-        width: 100px;
-    }
-    .nav-middle .mic-icon{
-        display: none;
-    }
-    .logo{
-        width: 90px;
-    }
-    
-}
+// @media (max-width: 100%){
+//     .menu-icon{
+//         display: block;
+//     }
+//     .nav-right img{
+//         display: block;
+//     }
+//     .nav-right .user-icon{
+//         display: block;
+//         width: 30px;
+//     }
+//     .nav-middle .search-box input{
+//         width: 100px;
+//     }
+//     .nav-middle .mic-icon{
+//         display: none;
+//     }
+//     button{
+//         width: 100%;
+//     }
+//     .logo{
+//         width: 90px;
+//     }
+// }
 
+@media (max-width: 400px){
+    .mic-icon {
+        display: none;
+    }
+}

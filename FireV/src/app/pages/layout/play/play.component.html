@@ -120,9 +120,11 @@
             <img src="{{(playVideo$ | async)?.author?.avatar}}">
             <div>
                 <p>{{(playVideo$ | async)?.author?.name}}</p>
-                <span>{{(playVideo$ | async)?.author?.subscribers}} người đăng kí</span>
+                <span>{{subscriber}} người đăng kí</span>
             </div>
-            <button type="button">Đăng Ký</button>
+            <button type="button" class="noneSub" (click)="updateSubcribe(idOfAuthor)" *ngIf="!isSubscribed && idOfAuthor != userId">Đăng Ký</button>
+            <button type="button" class="Sub" (click)="updateSubcribe(idOfAuthor)" *ngIf="isSubscribed && idOfAuthor != userId">
+              Đã đăng Ký</button>
         </div>
         <div class="vid-description">
             <p>{{(playVideo$ | async)?.title}}</p>
@@ -131,6 +133,7 @@
             <div class="add-comment">
                 <img src="../../../assets/images/anime.png">
                 <input type="text" placeholder="Viết bình luận...">
+                <button>Gửi</button>      
             </div>
             <div class="old-comment">
                 <img src="../../../assets/images/manga.png">
@@ -148,12 +151,12 @@
                         </div>
                         <div class="sidebar__category">
                             <i class="material-icons" style="color: #1e1f26" (click)="updateDislike(videoTest._id)" *ngIf="!isDisliked">thumb_down</i>
-                    <i class="material-icons" style="color: red"  (click)="updateDislike(videoTest._id)" *ngIf="isDisliked">thumb_down</i>
-                    <br />
-                    <span style="color: #240303;;">{{dislike}}</span>
+                            <i class="material-icons" style="color: red"  (click)="updateDislike(videoTest._id)" *ngIf="isDisliked">thumb_down</i>
+                            <br />
+                            <span style="color: #240303;;">{{dislike}}</span>
                         </div>
                         <span>Phản hồi</span>
-                        <!-- <a href="">Tất cả phản hồi</a> -->
+                        
                     </div>
                 </div>
             </div>

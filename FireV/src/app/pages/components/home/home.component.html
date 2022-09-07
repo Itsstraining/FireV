@@ -1,39 +1,57 @@
-<div id='center' class="main center">
-  <div class="mainInner">
-    <div class="text">
-      <div class="home-content">
-        <div class="filters">
-          <button class="filter-options active">Tất cả</button>
-          <button (click)="goToPopularPage()" class="filter-options">Thịnh hành</button>
-          <button class="filter-options">Trực tiếp</button>
-        </div>
-      </div>
-      <div class="home-body">
-        <div class="home-main">
-          <div class="col-md-auto" *ngFor="let video of Video$ | async">
-            <div class="card" (click)="playVideo(video._id)">
-              <div class="image-title">
-                <img class="card-img-top" src="{{ video.image_url }}" alt="Card image cap">
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class=".col">
-                    <img src="{{ video.author.avatar }}" class="rounded-circle" alt="Avatar" id="avatar"
-                      (error)="handleError($event)" />
-                  </div>
-                  <div class=".col">
-                    <div class="title-v">
-                      <p class="card-title">{{ video.title }}</p>
-                      <p class="card-text">{{ video.author.name }} <br>{{ video.views }} lượt xem - {{video.timeUp}}
-                        trước
+
+  <div *ngIf="isMinimize"  @slidein>
+    <div class="container1">
+        <div class="list-container">
+            <div class="uyen-list">
+                <div class="vid-list" *ngFor="let video of Video$ | async">
+                    <a >
+                        <img src="{{video.image_url}}" alt="" class="thumbnail" (click)="playVideo(video._id)">
+                    </a>
+                    <div class="flex-div" style="cursor:pointer;">
+                        <img (error)="handleError($event)" src="{{video.author.avatar}}" alt="ava">
+                        <div class="vid-info" (click)="playVideo(video._id)">
+                            <a class="owner-des" >{{video.title}}</a>
+                            <p class="owner-name">{{video.author.name}}</p>
+                            <p *ngIf="video.hour > 24">{{video.views}} Views &bull; {{video.day}} day ago</p>
+                            <p *ngIf="video.hour > 0 && video.hour < 25">{{video.views}} Views &bull; {{video.hour}}
+                                hour ago</p>
+                            <p *ngIf="video.hour < 1 && video.minute > 0">{{video.views}} Views &bull; {{video.minute}}
+                                minute ago</p>
+                            <p *ngIf="video.hour < 1 && video.minute < 1">{{video.views}} Views &bull; {{video.second}}
+                                second ago</p>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+<div *ngIf="!isMinimize" @slidein>
+    <div class="large-container">
+        <!-- <div class="banner">
+            <img src="../../../assets/images/banner.png" alt="">
+        </div> -->
+        <div class="list-container">
+            <div class="uyen-list">
+                <div class="vid-list" *ngFor="let video of Video$ | async">
+                    <a > <img src="{{video.image_url}}" class="thumbnail"  (click)="playVideo(video._id)" >
+                    </a>
+                    <div class="flex-div">
+                        <img (error)="handleError($event)" src="{{video.author.avatar}}" alt="ava">
+                        <div class="vid-info"  (click)="playVideo(video._id)">
+                            <a class="owner-des" >{{video.title}}</a>
+                            <p class="owner-name">{{video.author.name}}</p>
+                            <p *ngIf="video.hour > 24">{{video.views}} Views &bull; {{video.day}} day ago</p>
+                            <p *ngIf="video.hour > 0 && video.hour < 25">{{video.views}} Views &bull; {{video.hour}}
+                                hour ago</p>
+                            <p *ngIf="video.hour < 1 && video.minute > 0">{{video.views}} Views &bull; {{video.minute}}
+                                minute ago</p>
+                            <p *ngIf="video.hour < 1 && video.minute < 1">{{video.views}} Views &bull; {{video.second}}
+                                second ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

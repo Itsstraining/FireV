@@ -33,7 +33,7 @@ export class VideoService {
     async findByVideoId(_id: string) {
         try{
             return await this.videoModel.findOne({ _id: _id })
-            .populate('author', 'email avatar _id name subscribers',this.userModel);
+            .populate('author', 'email avatar _id name subscribers subscriberList',this.userModel);
         }catch(err){
             console.log(err);
         }
@@ -109,4 +109,5 @@ export class VideoService {
         const tam = await _video.save();
         return tam;
     }
+
 }
