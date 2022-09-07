@@ -1,5 +1,5 @@
 import { UploadModule } from './upload/upload.module';
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod, Get } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
@@ -35,6 +35,7 @@ export class AppModule implements NestModule{
         { path: 'video/play', method: RequestMethod.GET },
         { path: 'video/all/(.*)', method: RequestMethod.GET },
         { path: 'video/views/(.*)', method: RequestMethod.PUT },
+        { path: 'comment/video/(.*)', method: RequestMethod.GET },
         // { path: 'video/likes/(.*)', method: RequestMethod.PUT },
       //   // { path: 'video/all/vid', method: RequestMethod.GET },
       //   // { path: 'video/one/', method: RequestMethod.GET },

@@ -11,7 +11,7 @@ export class CommentController {
   public async createComment(@Body() comment: Comment, @Req() req: any, @Query('id') id: string){
     return await this.commentService.createComment(comment, req.user, id);
   }
-  @Get('video')
+  @Get('video/path')
   public async getCommentByVideoId(@Query('id') id: string){
     return await this.commentService.findAllComment(id);
   }

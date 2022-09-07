@@ -46,6 +46,9 @@ export class PlayComponent implements OnInit {
   idOfAuthor: string = '';
   photoURL: string | null = "";
   form!: FormGroup;
+  btnSubmit: boolean = false;
+
+  getCommentByVideoId$ = this.store.select((state) => state.comment.commentList);
 
   constructor(
     public route: ActivatedRoute,
@@ -60,6 +63,7 @@ export class PlayComponent implements OnInit {
     id.subscribe((id) => {
       this.store.dispatch(VideoActions.getVideoById({ id: id }));
       this.store.dispatch(VideoActions.getAllExceptId({ id: id }));
+      this.store.dispatch(CommentActions.getComment({ id: id }));
     });
 
     //get idtoken from user
@@ -258,6 +262,22 @@ export class PlayComponent implements OnInit {
       this.form.reset();
     }
 
+  }
+
+  openSubmit(event: any){
+
+    if(event.target.style.borderBottom == '1px solid black'){
+      console.log('open');
+      event.target.style.borderBottom = '1px solid #ccc';
+    }else{
+      console.log('open1');
+      event.target.style.borderBottom = '1px solid black';
+    }
+    this.btnSubmit = true;
+  }
+
+  closeSubmit(){
+    this.btnSubmit = false;
   }
 
 }

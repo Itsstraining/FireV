@@ -40,5 +40,30 @@ export const commentReducer = createReducer(
             error: action.error,
             isLoading: false
         }
+    }),
+    on(CommentActions.getComment, (state, action) => {
+        console.log(action.type)
+        return {
+            ...state,
+            isLoading: true,
+            _id: action.id
+        }
+    }),
+    on(CommentActions.getCommentSucceed, (state, action) => {
+        let newState = {
+            ...state,
+            isLoading: false,
+            commentList: action.comment
+        }
+        console.log(action.comment);
+        return newState;
+    }),
+    on(CommentActions.getCommentFailed, (state, action) => {
+        console.log(action.error)
+        return {
+            ...state,
+            error: action.error,
+            isLoading: false
+        }
     })
 );
