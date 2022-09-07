@@ -241,6 +241,7 @@
 .add-comment {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: 5ex 0;
     margin-top: 1ex;
     color: #240303;
@@ -256,30 +257,38 @@
     border: 0;
     outline: 0;
     border-bottom: 0.1ex solid #ccc;
+    height: 30px;
     width: 100%;
     padding-top: 1.5ex;
     background: transparent;
 
 }
+.add-comment .comment-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    margin-right: 50px;  
+}
 
-.add-comment button:hover {
+.add-comment .comment-box button:hover {
     color: #11131d; 
     font-weight: bolder;
 }
 
-.add-comment button{
-    flex: 0 0 auto;
-    padding: 8px 25px;
-    border-radius: 55px;
-    background: #2252ed;
-    border: 1px solid #fffefe;
-    text-transform: capitalize;
-    margin-right: 25px;
-    color: #dfe3f6;
-    font-size: 15px;
+.add-comment .comment-box button{
+    font-weight: bolder;
+    font-size: 14px;
     cursor: pointer;
-    margin-top: 15px;
-    margin-right: 25px;
+    margin-left: 15px;
+    border-radius: 10px;
+    height: 43px; 
+}
+.add-comment .comment-box .comment-bl {
+    width: 120px;
+    background-color: #2b58ec;
+    border: 1px solid #fffefe;
+    color: #dadeed;
 }
 
 .old-comment {
