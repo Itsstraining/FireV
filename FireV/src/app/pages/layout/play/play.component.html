@@ -1,3 +1,4 @@
+
 <div class="row1">
     <div class="play-video" *ngIf="playVideo$|async as videoTest">
         <div class="video">
@@ -88,10 +89,15 @@
                 <track kind="captions" srclang="en" src="assets/subtitles.vtt">
             </video>
         </div> -->
+        <p class="hashtag">
+            #123
+        </p>
         <div>
             <h1>{{(playVideo$ | async)?.title}}</h1>
         </div>
+
         <div class="play-video-info">
+            <p>{{(playVideo$ | async)?.views}} lượt xem &bull; 29 thg 7, 2022</p>
             <div class="like-share">
                 <div class="sidebar__category">
                     <i class="material-icons" style="color: #1e1f26"  (click)="updateLike(videoTest._id)" *ngIf="!isLiked">thumb_up</i>
@@ -110,12 +116,11 @@
                     <br />
                     <span style="color: #1e1f26;">Chia sẻ</span>
                 </div>
-
             </div>
-            <p>{{(playVideo$ | async)?.views}} lượt xem &bull; 29 thg 7, 2022</p>
         </div>
         <hr>
         <div class="plublisher">
+            <!-- <img src="../../../../assets/images/avatar1.png"> -->
             <img src="{{(playVideo$ | async)?.author?.avatar}}">
             <div>
                 <p>{{(playVideo$ | async)?.author?.name}}</p>
@@ -132,6 +137,7 @@
             <div class="add-comment">
                 <img src="../../../assets/images/anime.png">
                 <input type="text" placeholder="Viết bình luận...">
+                <button>Gửi</button>      
             </div>
             <div class="old-comment">
                 <img src="../../../assets/images/manga.png">
@@ -142,17 +148,19 @@
                         computer screen, this is the website design that we are going to create in this video.</p>
                     <div class="acomment-action">
                         <div class="sidebar__category">
-                            <i class="material-icons" style="color: #1e1f26" >thumb_up</i>
+                            <i class="material-icons" style="color: #1e1f26"  (click)="updateLike(videoTest._id)" *ngIf="!isLiked">thumb_up</i>
+                            <i class="material-icons" style="color: red"  (click)="updateLike(videoTest._id)" *ngIf="isLiked">thumb_up</i>
                             <br />
-                            <span style="color: #1e1f26;">512</span>
+                            <span style="color: #240303;;">{{like}}</span>
                         </div>
                         <div class="sidebar__category">
-                            <i class="material-icons" style="color: #1e1f26" >thumb_down</i>
+                            <i class="material-icons" style="color: #1e1f26" (click)="updateDislike(videoTest._id)" *ngIf="!isDisliked">thumb_down</i>
+                            <i class="material-icons" style="color: red"  (click)="updateDislike(videoTest._id)" *ngIf="isDisliked">thumb_down</i>
                             <br />
-                            <span style="color: #1e1f26;">12</span>
+                            <span style="color: #240303;;">{{dislike}}</span>
                         </div>
                         <span>Phản hồi</span>
-                        <!-- <a href="">Tất cả phản hồi</a> -->
+                        
                     </div>
                 </div>
             </div>

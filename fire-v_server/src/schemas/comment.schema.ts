@@ -9,7 +9,6 @@ import { Video } from './video.schema';
 })
 export class Comment {
 
-
   @IsNotEmpty()
   @Prop()
   content: string;

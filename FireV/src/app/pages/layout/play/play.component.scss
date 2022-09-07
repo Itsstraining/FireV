@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    background: #D0E1F9;
+    background: #EEEEEE;
 }
 
 .row1 {
@@ -31,10 +31,16 @@
     width: 100%;
 }
 
+.hashtag{
+    font-weight: bolder;
+    color: #2252ed;
+    margin-top: 5px;
+}
+
 .play-video h1 {
     font-weight: 600;
     font-size: 3ex;
-    margin-top: 2ex;
+    margin-top: 10px;
     white-space: nowrap;
     width: 100%;
     overflow: hidden;
@@ -73,7 +79,7 @@
     margin-right: 5px;
     background-color: transparent;
     cursor: pointer;
-
+    margin-left: 15px;
     i,
     span {
         background-color: transparent;
@@ -81,7 +87,9 @@
 
     // padding-left: 3ex;
 }
+// .play-video-info .sidebar__category i{
 
+// }
 .play-video-info .sidebar__category span {
     font-size: 1.5ex;
     padding-left: 1ex;
@@ -101,7 +109,7 @@
 .play-video hr {
     border: 0;
     height: 0.2ex;
-    background: rgb(111, 107, 107);
+    background: rgb(216, 211, 211);
     margin: 1.5ex 0;
 }
 
@@ -180,22 +188,21 @@
     color: #1e1f26;
 }
 .plublisher button:hover {
-    color: #1e1f26;
+    color: #11131d; 
+    font-weight: bolder;
 }
 
 .plublisher .noneSub {
     flex: 0 0 auto;
     padding: 8px 25px;
     border-radius: 55px;
-    background: #283655;
-    border: 1px solid #283655;
+    background: #ee5656;
+    border: 1px solid #fffefe;
     text-transform: capitalize;
     margin-right: 25px;
-    color: #d0e1f9;
+    color: #f4f4f4;
     font-size: 15px;
     cursor: pointer;
-    //box-shadow: 0 2px 4px 0 rgba(234, 148, 148, 0.4);
-    font-weight: bolder;
 }
 
 .plublisher .Sub {
@@ -253,6 +260,26 @@
     padding-top: 1.5ex;
     background: transparent;
 
+}
+
+.add-comment button:hover {
+    color: #11131d; 
+    font-weight: bolder;
+}
+
+.add-comment button{
+    flex: 0 0 auto;
+    padding: 8px 25px;
+    border-radius: 55px;
+    background: #2252ed;
+    border: 1px solid #fffefe;
+    text-transform: capitalize;
+    margin-right: 25px;
+    color: #dfe3f6;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-right: 25px;
 }
 
 .old-comment {

@@ -1,11 +1,15 @@
 .popular {
     margin: 0;
     padding-top: 1%;
-    background: #4D648D;  
+    background: #f3f2f2;  
 }
 
 .popular-menu {
     padding-left: 10%;
+}
+.popular-menu .material-icons{
+    border-radius: 50%;
+    background: #EEEEEE;
 }
 
 .sidebar__category {
@@ -34,22 +38,23 @@
 }
 
 .menu button:hover {
-    color: #11131d;
+    color: #11131d; 
+    font-weight: bolder;
 }
 
 .menu button {
     flex: 0 0 auto;
     padding: 8px 25px;
     border-radius: 55px;
-    background: #283655;
-    border: 1px solid #283655;
+    background: #eae4e4;
+    border: 1px solid #fffefe;
     text-transform: capitalize;
     margin-right: 25px;
-    color: #D0E1F9;
+    color: #11131d;
     font-size: 15px;
     cursor: pointer;
     //box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
-    font-weight: bolder;
+   
 }
 
 .menu .music {
@@ -69,7 +74,7 @@
 }
 
 .video-list {
-    background: #D0E1F9;  
+    background: #EEEEEE;  
     flex-basis: 150%;
 }
 
