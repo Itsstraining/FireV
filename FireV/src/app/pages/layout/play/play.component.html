@@ -90,7 +90,7 @@
             </video>
         </div> -->
         <p class="hashtag">
-            #123
+          {{(playVideo$ | async)?.hashtags}}
         </p>
         <div>
             <h1>{{(playVideo$ | async)?.title}}</h1>
@@ -135,9 +135,11 @@
             <hr>
             <h2>12 Bình luận</h2>
             <div class="add-comment">
-                <img src="../../../assets/images/anime.png">
-                <input type="text" placeholder="Viết bình luận...">
-                <button>Gửi</button>      
+                <img src="{{photoURL}}" (error)="handleError($event)">
+                <form  [formGroup]="form" (submit)="createComment(videoTest._id)">
+                  <input type="text" placeholder="Viết bình luận..." formControlName="content">
+                  <button class="comment-submit" type="submit">Gửi</button>
+                </form>
             </div>
             <div class="old-comment">
                 <img src="../../../assets/images/manga.png">
@@ -160,7 +162,7 @@
                             <span style="color: #240303;;">{{dislike}}</span>
                         </div>
                         <span>Phản hồi</span>
-                        
+
                     </div>
                 </div>
             </div>

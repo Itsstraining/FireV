@@ -8,4 +8,9 @@ export interface Comment{
     createdAt: string;
     commentList: Comment[];
     isHidden: boolean;
+    timeUp: number;
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
 }
