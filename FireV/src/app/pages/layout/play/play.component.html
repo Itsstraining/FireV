@@ -90,7 +90,7 @@
             </video>
         </div> -->
         <p class="hashtag">
-            #123
+          {{(playVideo$ | async)?.hashtags}}
         </p>
         <div>
             <h1>{{(playVideo$ | async)?.title}}</h1>
@@ -135,37 +135,39 @@
             <hr>
             <h2>12 Bình luận</h2>
             <div class="add-comment">
-                <img src="../../../assets/images/anime.png">
-                <input type="text" placeholder="Viết bình luận...">
-                <div class="comment-box">
-                    <button type="button" class="btn btn-outline-danger" style="width: 50px;">Xóa</button>
-                    <button class="comment-bl">Bình luận</button> 
-                </div>   
+                <img src="{{photoURL}}" (error)="handleError($event)">
+                <form  [formGroup]="form" (submit)="createComment(videoTest._id)">
+                  <input type="text"  style="border-bottom: 1px solid #ccc" placeholder="Viết bình luận..." formControlName="content" (blur)="openSubmit($event)" (focus)="openSubmit($event)">
+                  <div class="comment-box" *ngIf="btnSubmit">
+                      <button  class="btn btn-outline-danger" style="width: 50px;" type="cancel" (click)="closeSubmit()">Hủy</button>
+                      <button class="comment-bl" type="submit">Bình luận</button>
+                  </div>
+              </form>
             </div>
-            <div class="old-comment">
-                <img src="../../../assets/images/manga.png">
-                <div>
-                    <h1>Cúc Nở Hướng Dương <span>2 ngày trước</span></h1>
-                    <p>In this video will make a video sharing website design like YouTube using HTML, CSS and
-                        JavaScript and this website design is completely inspired by YouTube. As you can see on my
-                        computer screen, this is the website design that we are going to create in this video.</p>
-                    <div class="acomment-action">
-                        <div class="sidebar__category">
-                            <i class="material-icons" style="color: #1e1f26"  (click)="updateLike(videoTest._id)" *ngIf="!isLiked">thumb_up</i>
-                            <i class="material-icons" style="color: red"  (click)="updateLike(videoTest._id)" *ngIf="isLiked">thumb_up</i>
-                            <br />
-                            <span style="color: #240303;;">{{like}}</span>
-                        </div>
-                        <div class="sidebar__category">
-                            <i class="material-icons" style="color: #1e1f26" (click)="updateDislike(videoTest._id)" *ngIf="!isDisliked">thumb_down</i>
-                            <i class="material-icons" style="color: red"  (click)="updateDislike(videoTest._id)" *ngIf="isDisliked">thumb_down</i>
-                            <br />
-                            <span style="color: #240303;;">{{dislike}}</span>
-                        </div>
-                        <span>Phản hồi</span>
-                        
-                    </div>
+            <div  *ngFor="let comment of getCommentByVideoId$ | async">
+              <div class="old-comment">
+                <img src="{{comment.author.avatar}}">
+                <div >
+                  <h1>{{comment.author.name}} <span>- {{comment.timeUp}} trước</span> </h1>
                 </div>
+              </div>
+              <div class="comment-content">
+                <p>{{comment.content}}</p>
+                <div class="acomment-action">
+                    <div class="sidebar__category">
+                        <i class="material-icons" style="color: #1e1f26"  (click)="updateLike(videoTest._id)" *ngIf="!isLiked">thumb_up</i>
+                        <i class="material-icons" style="color: red"  (click)="updateLike(videoTest._id)" *ngIf="isLiked">thumb_up</i>
+                        <span style="color: #240303;;">{{like}}</span>
+                    </div>
+                    <div class="sidebar__category">
+                        <i class="material-icons" style="color: #1e1f26" (click)="updateDislike(videoTest._id)" *ngIf="!isDisliked">thumb_down</i>
+                        <i class="material-icons" style="color: red"  (click)="updateDislike(videoTest._id)" *ngIf="isDisliked">thumb_down</i>
+                        <span style="color: #240303;;">{{dislike}}</span>
+                    </div>
+                    <span>Phản hồi</span>
+                </div>
+              </div>
+
             </div>
         </div>
     </div>
