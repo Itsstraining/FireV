@@ -136,10 +136,10 @@ main{
   width: 840px;
   padding-top: 30px ;
   padding-left: 20px;
-  
+
 }
 .content_header{
-  
+
   display:flex;
   justify-content: space-between;
   align-items: center;
@@ -230,6 +230,7 @@ main{
   text-overflow: ellipsis;
   font-weight: 600;
   color: #1e1f26;
+  cursor: pointer;
 }
 .vid-info p{
   margin-top: 10px;
@@ -247,3 +248,28 @@ main{
       flex-wrap: wrap;
   }
 }
+.management{
+  padding-left: 8px;
+  margin-top: 90px;
+}
+.management i{
+  width: 20px;
+  height: 20px;
+  margin-top: 8px;
+}
+.update{
+  // margin-bottom: 10px;
+  display: flex;
+  cursor: pointer;
+}
+.update p{
+  margin-left: 5px;
+}
+.delete{
+  display: flex;
+  cursor: pointer;
+}
+.delete p{
+  margin-left: 5px;
+}
+

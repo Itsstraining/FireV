@@ -13,12 +13,36 @@
 
   <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>MÔ TẢ</mat-label>
-    <input matInput type="text" [(ngModel)]="value2" placeholder="Mô tả">
+    <textarea matInput type="text" [(ngModel)]="value2" placeholder="Mô tả"></textarea>
     <button *ngIf="value2" matSuffix mat-icon-button aria-label="Clear" (click)="value2=''">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
 
+  <mat-form-field class="example-form-field" appearance="fill">
+    <mat-label>Chủ đề tùy chỉnh</mat-label>
+    <mat-select>
+      <mat-option value="Âm nhạc">Âm nhạc</mat-option>
+      <mat-option value="Phim">Phim</mat-option>
+      <mat-option value="Thể thao">Thể Thao</mat-option>
+      <mat-option value="Học tập">Học tập</mat-option>
+      <mat-option value="Khoa học">Khoa học</mat-option>
+      <mat-option value="Xã hội">Xã hội</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-form-field" appearance="fill">
+    <mat-label>Chế độ hiển thị</mat-label>
+    <mat-select>
+      <mat-option value="true">Công khai</mat-option>
+      <mat-option value="false">Không công khai</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-form-field" appearance="fill">
+    <mat-label>Hashtag</mat-label>
+    <input matInput type="text" [(ngModel)]="value1" placeholder="Hashtag">
+  </mat-form-field>
   <button mat-raised-button class="confirm" (click)="openDialog()">CẬP NHẬT</button>
 
 </div>

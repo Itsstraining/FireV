@@ -55,4 +55,11 @@ export class AuthEffects {
     catchError(error => of(AuthActions.updateSubFailure({ error: error }))),
   ))
 
+  getUserByIdEffect = createEffect(() => this.action$.pipe(
+    ofType(AuthActions.getUserById),
+    switchMap((action) => this.userService.getUserById(action.id)),
+    map((user) => AuthActions.getUserByIdSuccess({ user })),
+    catchError(error => of(AuthActions.getUserByIdFailure({ error: error }))),
+  ))
+
 }

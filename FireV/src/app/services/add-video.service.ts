@@ -39,6 +39,13 @@ export class AddVideoService {
   updateUndislikes(id: string, idToken: string ): Observable<Video>{
     return this.http.put<Video>(`http://127.0.0.1:3000/video/undislikes/path?id=`+id, '',  { headers: new HttpHeaders({ 'Authorization': `${idToken}` }) });
   }
-
-
+  getVideoByUserId(id: string, idToken: string): Observable<Video[]>{
+    return this.http.get<Video[]>(`http://127.0.0.1:3000/video/author/path?id=`+id,  { headers: new HttpHeaders({ 'Authorization': `${idToken}` }) });
+  }
+  deleteVideo(id: string, idToken: string): Observable<Video>{
+    return this.http.delete<Video>(`http://127.0.0.1:3000/video/delete/path?id=`+id,  { headers: new HttpHeaders({ 'Authorization': `${idToken}` }) });
+  }
+  updateVideo(id: string, video: any, idToken: string){
+    return this.http.put<Video>(`http:http://127.0.0.1:3000/video/delete/path?id=`+id, video, { headers: new HttpHeaders({ 'Authorization': `${idToken}` }) });
+  }
 }

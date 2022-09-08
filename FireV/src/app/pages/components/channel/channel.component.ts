@@ -14,6 +14,7 @@ import { UpdateComponent } from 'src/app/pages/components/update/update.componen
 import {MatDialog} from '@angular/material/dialog';
 import { InteractService } from 'src/app/services/interact.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 @Component({
   selector: 'app-channel',
   templateUrl: './channel.component.html',
@@ -27,7 +28,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
       ]),
       transition(':leave', [
         // when ngIf has false
-        animate(.3, 
+        animate(.3,
         style({ transform: 'translateX(.5s)' }))
       ])
     ])
@@ -47,14 +48,22 @@ export class ChannelComponent implements OnInit {
   userId: string = '';
   author: User = <User>{};
   form!: FormGroup;
+  photoURL: string | null = "";
+  name: string | null = "";
+  subscribers: number = 0;
+  likes: number = 0;
+  dislikes: number = 0;
+  getVideoByUserId$ = this.store.select((state) => state.video.videoList);
+
+  userInfo$ = this.store.select((state) => state.auth.user);
   constructor(public dialog: MatDialog, public route: ActivatedRoute,
-    public interactService : InteractService, 
-    private store: Store<{ video: VideoState; auth: AuthState }>) {
-    const id: Observable<string> = route.queryParams.pipe(map((p) => p['id']));
-    id.subscribe((id) => {
-      this.store.dispatch(VideoActions.getVideoById({ id: id }));
-      this.store.dispatch(VideoActions.getAllExceptId({ id: id }));
-    });
+    public interactService : InteractService,
+    private store: Store<{ video: VideoState; auth: AuthState }>, private router: Router) {
+    // const id: Observable<string> = route.queryParams.pipe(map((p) => p['id']));
+    // id.subscribe((id) => {
+    //   this.store.dispatch(VideoActions.getVideoById({ id: id }));
+    //   this.store.dispatch(VideoActions.getAllExceptId({ id: id }));
+    // });
 
     //get idtoken from user
     this.idToken$.subscribe((value) => {
@@ -74,7 +83,7 @@ export class ChannelComponent implements OnInit {
         console.log(value);
         console.log('Author id nè ' + this.author._id);
       }
-    }); 
+    });
   }
 
   ngOnInit(): void {
@@ -82,6 +91,8 @@ export class ChannelComponent implements OnInit {
       if (value) {
         this.userId = value;
         console.log('User id nè ' + this.userId);
+        this.store.dispatch(AuthActions.getUserById({ id: this.userId }));
+        this.store.dispatch(VideoActions.getVideoByUserId({ id: this.userId, idToken: this.idToken }));
       }
     });
     this.interactService.listenToggleMenu((isCheck) => {
@@ -89,6 +100,9 @@ export class ChannelComponent implements OnInit {
       console.log(this.isMinimize)
       // this.changeDetector.detectChanges()
     });
+
+
+
   }
   // openDialog1() {
   //   const dialogRef = this.dialog.open(UpdateComponent);
@@ -116,40 +130,52 @@ export class ChannelComponent implements OnInit {
     window.location.href = `/play?id=${id}`;
   }
 
-  setCurrentTime(event: any) {
-    this.currentTime = event.target.currentTime;
-    this.totalTime = event.target.duration;
+  // setCurrentTime(event: any) {
+  //   this.currentTime = event.target.currentTime;
+  //   this.totalTime = event.target.duration;
 
-    //  console.log(this.currentTime);
-    const id: Observable<string> = this.route.queryParams.pipe(
-      map((p) => p['id'])
-    );
-    id.subscribe((id) => {
-      const video: Observable<any> = this.route.queryParams.pipe(
-        map((p) => p['video'])
-      );
-      video.subscribe((video) => {
-        if (this.author._id != this.userId) {
-          if (this.totalTime >= 120.0) {
-            if (this.currentTime > 120.0 && this.currentTime < 120.2) {
-              this.store.dispatch(
-                VideoActions.updateViews({ id: id, video: video })
-              );
-            }
-          } else if (this.totalTime < 120.0) {
-            if (this.currentTime >= this.totalTime) {
-              this.store.dispatch(
-                VideoActions.updateViews({ id: id, video: video })
-              );
-            }
-          }
-        }
+  //   //  console.log(this.currentTime);
+  //   const id: Observable<string> = this.route.queryParams.pipe(
+  //     map((p) => p['id'])
+  //   );
+  //   id.subscribe((id) => {
+  //     const video: Observable<any> = this.route.queryParams.pipe(
+  //       map((p) => p['video'])
+  //     );
+  //     video.subscribe((video) => {
+  //       if (this.author._id != this.userId) {
+  //         if (this.totalTime >= 120.0) {
+  //           if (this.currentTime > 120.0 && this.currentTime < 120.2) {
+  //             this.store.dispatch(
+  //               VideoActions.updateViews({ id: id, video: video })
+  //             );
+  //           }
+  //         } else if (this.totalTime < 120.0) {
+  //           if (this.currentTime >= this.totalTime) {
+  //             this.store.dispatch(
+  //               VideoActions.updateViews({ id: id, video: video })
+  //             );
+  //           }
+  //         }
+  //       }
 
-        console.log(this.totalTime);
-        // console.log(this.currentTime);
-      });
-    });
+  //       console.log(this.totalTime);
+  //       // console.log(this.currentTime);
+  //     });
+  //   });
+  // }
+
+
+
+  createVideo(){
+    this.router.navigateByUrl('add');
   }
+
+  deleteVideo(id: string){
+    this.store.dispatch(VideoActions.deleteVideo({id: id, idToken: this.idToken}));
+    this.store.dispatch(VideoActions.getVideoByUserId({ id: this.userId, idToken: this.idToken }));
+  }
+
 }
 
 

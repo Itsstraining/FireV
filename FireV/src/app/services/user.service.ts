@@ -21,4 +21,8 @@ export class UserService {
   updateSubcribers(id: string, idToken: string ): Observable<Video>{
     return this.http.put<Video>(`http://127.0.0.1:3000/user/subscribers/path?id=`+id, '',  { headers: new HttpHeaders({ 'Authorization': `${idToken}` }) });
   }
+
+  public getUserById(id: string){
+    return this.http.get('http://127.0.0.1:3000/user/infor/path?id='+id);
+  }
 }

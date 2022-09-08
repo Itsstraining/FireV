@@ -57,4 +57,56 @@ export class CommentEffect {
       }
     )
   ));
+
+  updateLike$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CommentActions.updateLike),
+      switchMap((action) => {
+        return this.commentService.updateLike(action.id, action.idToken);
+      }),
+     map((comment) => CommentActions.updateLikeSucceed({ comment })),
+      catchError((error) => {
+        return of(CommentActions.updateLikeFailed({ error: error }));
+      }
+    )
+  ));
+
+  updateDislike$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CommentActions.updateDislike),
+      switchMap((action) => {
+        return this.commentService.updateDislike(action.id, action.idToken);
+      }),
+     map((comment) => CommentActions.updateDislikeSucceed({ comment })),
+      catchError((error) => {
+        return of(CommentActions.updateDislikeFailed({ error: error }));
+      }
+    )
+  ));
+
+  updateUnlike$  = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CommentActions.updateUnlike),
+      switchMap((action) => {
+        return this.commentService.updateUnlike(action.id, action.idToken);
+      }),
+     map((comment) => CommentActions.updateUnlikeSucceed({ comment })),
+      catchError((error) => {
+        return of(CommentActions.updateUnlikeFailed({ error: error }));
+      }
+    )
+  ));
+
+  updateUndislike$  = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CommentActions.updateUndislike),
+      switchMap((action) => {
+        return this.commentService.updateUndislike(action.id, action.idToken);
+      }),
+     map((comment) => CommentActions.updateUndislikeSucceed({ comment })),
+      catchError((error) => {
+        return of(CommentActions.updateUndislikeFailed({ error: error }));
+      }
+    )
+  ));
 }

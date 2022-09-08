@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Delete, Query, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Query, Req, Put } from '@nestjs/common';
 import { Comment } from 'src/schemas/comment.schema';
 import { CommentService } from './comment.service';
 
@@ -15,5 +15,22 @@ export class CommentController {
   public async getCommentByVideoId(@Query('id') id: string){
     return await this.commentService.findAllComment(id);
   }
+  @Put('like/path')
+  public async updateLike(@Query('id') id: string, @Req() req: any){
+    return await this.commentService.updateLike(id, req.user);
+  }
+  @Put('dislike/path')
+  public async updateDislike(@Query('id') id: string, @Req() req: any){
+    return await this.commentService.updateDislike(id, req.user);
+  }
+  @Put('unlike/path')
+  public async updateUnlike(@Query('id') id: string, @Req() req: any){
+    return await this.commentService.updateLike(id, req.user);
+  }
+  @Put('undislike/path')
+  public async updateUndislike(@Query('id') id: string, @Req() req: any){
+    return await this.commentService.updateDislike(id, req.user);
+  }
+
   
 }
