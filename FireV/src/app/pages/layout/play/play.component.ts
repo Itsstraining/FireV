@@ -102,21 +102,18 @@ export class PlayComponent implements OnInit {
       if (value) {
         this.userId = value;
         console.log('User id nè ' + this.userId);
-          if (this.likeList.includes(this.userId)) {
-            this.isLiked = true;
-          } else if (this.dislikeList.includes(this.userId)) {
-            this.isDisliked = true;
-          }
-          if (this.subscriberList.includes(this.userId)) {
-            console.log('sublist nè ' + this.subscriberList);
-            this.isSubscribed = true;
-          }
+        if (this.likeList.includes(this.userId)) {
+          this.isLiked = true;
+        } else if (this.dislikeList.includes(this.userId)) {
+          this.isDisliked = true;
+        }
+        if (this.subscriberList.includes(this.userId)) {
+          console.log('sublist nè ' + this.subscriberList);
+          this.isSubscribed = true;
+        }
 
       }
     });
-
-
-
   }
 
   playVideo(id: string) {
@@ -155,36 +152,36 @@ export class PlayComponent implements OnInit {
   }
 
   updateLike(videoId: string) {
-    if(this.userId == ''){
+    if (this.userId == '') {
       this.snackBar.openFromComponent(SnackBarComponent, {
         duration: 3000
       });
     }
-   else{
-    if (this.isDisliked == false && this.isLiked == false) {
-      this.store.dispatch(VideoActions.updateLikes({ id: videoId, idToken: this.idToken }));
-      this.like += 1;
-      this.isLiked = true;
+    else {
+      if (this.isDisliked == false && this.isLiked == false) {
+        this.store.dispatch(VideoActions.updateLikes({ id: videoId, idToken: this.idToken }));
+        this.like += 1;
+        this.isLiked = true;
+      }
+      else if (this.isDisliked == true && this.isLiked == false) {
+        this.store.dispatch(VideoActions.updateLikes({ id: videoId, idToken: this.idToken }));
+        this.dislike -= 1;
+        this.like += 1;
+        this.isLiked = true;
+        this.isDisliked = false;
+      } else if (this.isDisliked == false && this.isLiked == true) {
+        this.store.dispatch(VideoActions.updateUnlikes({ id: videoId, idToken: this.idToken }));
+        this.like -= 1;
+        this.isLiked = false;
+      }
     }
-    else if (this.isDisliked == true && this.isLiked == false) {
-      this.store.dispatch(VideoActions.updateLikes({ id: videoId, idToken: this.idToken }));
-      this.dislike -= 1;
-      this.like += 1;
-      this.isLiked = true;
-      this.isDisliked = false;
-    } else if (this.isDisliked == false && this.isLiked == true) {
-      this.store.dispatch(VideoActions.updateUnlikes({ id: videoId, idToken: this.idToken }));
-      this.like -= 1;
-      this.isLiked = false;
-    }
-   }
   }
   updateDislike(videoId: string) {
-    if(this.userId == ''){
+    if (this.userId == '') {
       this.snackBar.openFromComponent(SnackBarComponent, {
         duration: 3000
       });
-    }else{
+    } else {
       if (this.isDisliked == false && this.isLiked == false) {
         this.store.dispatch(VideoActions.updateDislikes({ id: videoId, idToken: this.idToken }));
         this.dislike += 1;
@@ -206,12 +203,12 @@ export class PlayComponent implements OnInit {
   }
 
   updateSubcribe(authorId: string) {
-    if(this.author._id != this.userId){
-      if(this.userId == ''){
+    if (this.author._id != this.userId) {
+      if (this.userId == '') {
         this.snackBar.openFromComponent(SnackBarComponent, {
           duration: 3000
         });
-      }else{
+      } else {
         this.store.dispatch(AuthActions.updateSub({ id: authorId, idToken: this.idToken }));
         if (this.isSubscribed == false) {
           this.subscriber += 1;
