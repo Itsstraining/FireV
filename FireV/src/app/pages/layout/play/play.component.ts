@@ -48,7 +48,15 @@ export class PlayComponent implements OnInit {
   form!: FormGroup;
   btnSubmit: boolean = false;
 
+
+  isLikedComment: boolean = false;
+  isDislikedComment: boolean = false;
   getCommentByVideoId$ = this.store.select((state) => state.comment.commentList);
+  authorComment: User = <User>{};
+  likeCom: number = 0;
+  dislikeCom: number = 0;
+  commentTam: User = <User>{};
+
 
   constructor(
     public route: ActivatedRoute,
@@ -98,13 +106,6 @@ export class PlayComponent implements OnInit {
         this.dislikeList = value.dislikeList;
       }
     });
-
-    // this.userAvatar$.subscribe((value) => {
-    //   if (value) {
-    //     this.userAvatar = value.avatar;
-    //     console.log('Avatar nè ' + this.userAvatar);
-    //   }
-    // });
 
 
   }
@@ -279,5 +280,58 @@ export class PlayComponent implements OnInit {
   closeSubmit(){
     this.btnSubmit = false;
   }
+
+
+
+  // updateLikeComment(commentId: string) {
+  //   if(this.userId == ''){
+  //     this.snackBar.openFromComponent(SnackBarComponent, {
+  //       duration: 3000
+  //     });
+  //   }
+  //  else{
+  //   if (this.isDislikedComment == false && this.isLikedComment == false) {
+  //     this.store.dispatch(CommentActions.updateLike({ id: commentId, idToken: this.idToken }));
+  //     this.like += 1;
+  //     this.isLiked = true;
+  //   }
+  //   else if (this.isDisliked == true && this.isLiked == false) {
+  //     this.store.dispatch(VideoActions.updateLikes({ id: videoId, idToken: this.idToken }));
+  //     this.dislike -= 1;
+  //     this.like += 1;
+  //     this.isLiked = true;
+  //     this.isDisliked = false;
+  //   } else if (this.isDisliked == false && this.isLiked == true) {
+  //     this.store.dispatch(VideoActions.updateUnlikes({ id: videoId, idToken: this.idToken }));
+  //     this.like -= 1;
+  //     this.isLiked = false;
+  //   }
+  //  }
+  // }
+  // updateDislikeComment(videoId: string) {
+  //   if(this.userId == ''){
+  //     this.snackBar.openFromComponent(SnackBarComponent, {
+  //       duration: 3000
+  //     });
+  //   }else{
+  //     if (this.isDisliked == false && this.isLiked == false) {
+  //       this.store.dispatch(VideoActions.updateDislikes({ id: videoId, idToken: this.idToken }));
+  //       this.dislike += 1;
+  //       this.isDisliked = true;
+  //     }
+  //     else if (this.isDisliked == false && this.isLiked == true) {
+  //       this.store.dispatch(VideoActions.updateDislikes({ id: videoId, idToken: this.idToken }));
+  //       this.dislike += 1;
+  //       this.like -= 1;
+  //       this.isLiked = false;
+  //       this.isDisliked = true;
+  //     } else if (this.isDisliked == true && this.isLiked == false) {
+  //       this.store.dispatch(VideoActions.updateUndislikes({ id: videoId, idToken: this.idToken }));
+  //       this.dislike -= 1;
+  //       this.isDisliked = false;
+  //     }
+  //   }
+
+  // }
 
 }

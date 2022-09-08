@@ -14,12 +14,13 @@ export class UpdateComponent implements OnInit {
     public dialog: MatDialog,
     public http: HttpClient
   ) {}
- 
+
   ngOnInit(): void {
   }
   public openDialog(){
     this.dialog.closeAll();
-    this.dialog.open(HomeComponent);
-   
+    //this.dialog.open(HomeComponent);
+
   }
+
 }

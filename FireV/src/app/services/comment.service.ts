@@ -16,4 +16,17 @@ export class CommentService {
   getComment(id: string): Observable<Comment[]>{
     return this.http.get<Comment[]>(`http://127.0.0.1:3000/comment/video/path?id=`+id);
   }
+
+  updateLike(id: string, idToken: string): Observable<Comment>{
+    return this.http.put<Comment>(`http://127.0.0.1:3000/comment/like/path?id=`+id, '', { headers: new HttpHeaders({ 'Authorization': `${idToken}` }) });
+  }
+  updateUnlike(id: string, idToken: string): Observable<Comment>{
+    return this.http.put<Comment>(`http://127.0.0.1:3000/comment/unlike/path?id=`+id, '', { headers: new HttpHeaders({ 'Authorization': `${idToken}` }) });
+  }
+  updateDislike(id: string, idToken: string ): Observable<Comment>{
+    return this.http.put<Comment>(`http://127.0.0.1:3000/comment/dislike/path?id=`+id, '',  { headers: new HttpHeaders({ 'Authorization': `${idToken}` }) });
+  }
+  updateUndislike(id: string, idToken: string ): Observable<Comment>{
+    return this.http.put<Comment>(`http://127.0.0.1:3000/comment/undislike/path?id=`+id, '',  { headers: new HttpHeaders({ 'Authorization': `${idToken}` }) });
+  }
 }

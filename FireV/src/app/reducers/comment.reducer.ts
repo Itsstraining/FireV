@@ -65,5 +65,117 @@ export const commentReducer = createReducer(
             error: action.error,
             isLoading: false
         }
+    }),
+    on(CommentActions.updateLike, (state, action) => {
+        console.log(action.type)
+        return {
+            ...state,
+            isLoading: true,
+            idToken: action.idToken,
+            _id: action.id
+        }
+    }),
+    on(CommentActions.updateLikeSucceed, (state, action) => {
+        let newState = {
+            ...state,
+            isLoading: false,
+            //commentLoad: action.comment
+            _id: ""
+        }
+        console.log(action.type);
+        return newState;
+    }),
+    on(CommentActions.updateLikeFailed, (state, action) => {
+        console.log(action.error)
+        return {
+            ...state,
+            error: action.error,
+            isLoading: false,
+            _id: ""
+        }
+    }),
+    on(CommentActions.updateDislike, (state, action) => {
+        console.log(action.type)
+        return {
+            ...state,
+            isLoading: true,
+            idToken: action.idToken,
+            _id: action.id
+        }
+    }),
+    on(CommentActions.updateDislikeSucceed, (state, action) => {
+        let newState = {
+            ...state,
+            isLoading: false,
+            //commentLoad: action.comment
+            _id: ""
+        }
+        console.log(action.type);
+        return newState;
+    }),
+    on(CommentActions.updateDislikeFailed, (state, action) => {
+        console.log(action.error)
+        return {
+            ...state,
+            error: action.error,
+            isLoading: false,
+            _id: ""
+        }
+    }),
+   on(CommentActions.updateUnlike, (state, action) => {
+        console.log(action.type)
+        return {
+            ...state,
+            isLoading: true,
+            idToken: action.idToken,
+            _id: action.id
+        }
+    }),
+    on(CommentActions.updateUnlikeSucceed, (state, action) => {
+        let newState = {
+            ...state,
+            isLoading: false,
+            //commentLoad: action.comment
+            _id: ""
+        }
+        console.log(action.type);
+        return newState;
+    }),
+    on(CommentActions.updateUnlikeFailed, (state, action) => {
+        console.log(action.error)
+        return {
+            ...state,
+            error: action.error,
+            isLoading: false,
+            _id: ""
+        }
+    }),
+    on(CommentActions.updateUndislike, (state, action) => {
+        console.log(action.type)
+        return {
+            ...state,
+            isLoading: true,
+            idToken: action.idToken,
+            _id: action.id
+        }
+    }),
+    on(CommentActions.updateUndislikeSucceed, (state, action) => {
+        let newState = {
+            ...state,
+            isLoading: false,
+            //commentLoad: action.comment
+            _id: ""
+        }
+        console.log(action.type);
+        return newState;
+    }),
+    on(CommentActions.updateUndislikeFailed, (state, action) => {
+        console.log(action.error)
+        return {
+            ...state,
+            error: action.error,
+            isLoading: false,
+            _id: ""
+        }
     })
 );

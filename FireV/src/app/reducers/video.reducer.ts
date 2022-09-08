@@ -1,3 +1,4 @@
+
 import { createReducer, on } from "@ngrx/store";
 import { Video } from "../models/video.model";
 import { VideoState } from "../states/video.state";
@@ -261,4 +262,63 @@ export const videoReducer = createReducer(
       _id: ""
     }
   }),
+  on(VideoActions.getVideoByUserId, (state, action) => {
+    console.log(action.id)
+    return {
+      ...state,
+      isLoading: true,
+      _id: action.id,
+      idToken: action.idToken,
+    }
+  }),
+  on(VideoActions.getVideoByUserIdSucceed, (state, action) => {
+    let newState = {
+      ...state,
+      isLoading: false,
+      videoList: action.video,
+      _id: "",
+    }
+    console.log(action.video);
+    return newState;
+  }),
+  on(VideoActions.getVideoByUserIdFailed, (state, action) => {
+    console.log(action.error)
+    return {
+      ...state,
+      error: action.error,
+      isLoading: false,
+      _id: ""
+    }
+  }),
+  on(VideoActions.deleteVideo, (state, action) => {
+    console.log(action.id)
+    return {
+      ...state,
+      isLoading: true,
+      _id: action.id,
+      idToken: action.idToken,
+    }
+  }),
+  on(VideoActions.deleteVideoSucceed, (state, action) => {
+    let newState = {
+      ...state,
+      isLoading: false,
+      videoLoad: action.video,
+      _id: "",
+    }
+    console.log(action.video);
+    return newState;
+  }),
+  on(VideoActions.deleteVideoFailed, (state, action) => {
+    console.log(action.error)
+    return {
+      ...state,
+      error: action.error,
+      isLoading: false,
+      _id: ""
+    }
+  }),
+
+
+
 );

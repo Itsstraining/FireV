@@ -159,4 +159,32 @@ export const authReducer = createReducer(
     return newState;
   }),
 
+  /////////////////////////////////////////////////////////////
+  on(AuthActions.getUserById, (state, action) => {
+    let newState = {
+      ...state,
+      id: action.id
+    }
+    console.log(action.type);
+    return newState;
+  }),
+  on(AuthActions.getUserByIdSuccess, (state, action) => {
+    let newState = {
+      ...state,
+      user: action.user,
+      isAuthenticated: true,
+    }
+    console.log(action.type);
+    return newState;
+  }),
+  on(AuthActions.getUserByIdFailure, (state, action) => {
+    let newState = {
+      ...state,
+      isAuthenticated: false,
+      error: action.error
+    }
+    console.log(action.type);
+    return newState;
+  }),
+
 )

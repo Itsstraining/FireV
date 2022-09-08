@@ -127,4 +127,35 @@ export const updateUndislikesFailed = createAction(
 );
 
 
+//get all video by user id from db
+export const getVideoByUserId = createAction(
+  '[Video] Get Video By User Id',
+  props<{ id: string, idToken: string }>()
+);
+export const getVideoByUserIdSucceed = createAction(
+  '[Video] Get Video By User Id Succeed',
+  props<{ video: Video[] }>()
+);
+export const getVideoByUserIdFailed = createAction(
+  '[Video] Get Video By User Id Failed',
+  props<{ error: string }>()
+);
+
+
+//delete video from db
+export const deleteVideo = createAction(
+  '[Video] Delete Video',
+  props<{ id: string, idToken: string }>()
+);
+export const deleteVideoSucceed = createAction(
+  '[Video] Delete Video Succeed',
+  props<{ video: Video }>()
+);
+export const deleteVideoFailed = createAction(
+  '[Video] Delete Video Failed',
+  props<{ error: string }>()
+);
+
+
+
 

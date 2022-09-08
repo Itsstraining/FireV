@@ -110,4 +110,25 @@ export class VideoService {
         return tam;
     }
 
+    async getVideoByAuthorId(id: string, user: any) {
+        const user_Indb = await this.userModel.findOne({
+            email: user.email,
+        }).exec();
+        const idOfUser = user_Indb._id;
+        if(idOfUser == id){
+           return await this.videoModel.find({author: id});
+        }else{
+            console.log("not found");
+        }
+
+    }
+
+    async deleteVideo(id: string) {
+        return await this.videoModel.findOneAndDelete({_id: id});
+    }
+
+    async updateVideoInfo(id: string, video: Video) {
+        return await this.videoModel.findOneAndUpdate({_id: id}, video, {new: true});
+    }
+
 }

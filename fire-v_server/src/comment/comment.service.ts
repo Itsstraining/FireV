@@ -37,5 +37,54 @@ export class CommentService {
         // .populate('replyTo', 'author content createdAt video');
     }
 
+    async updateLike(id: string, user: any){
+        const _comment = await this.commentModel.findOne({_id: id});
+        const user_Indb = await this.userModel.findOne({
+            email: user.email,
+        }).exec();
+        const idOfUser = user_Indb._id;
+
+        if(_comment.dislikeList.includes(user_Indb._id)){
+            const index = _comment.dislikeList.indexOf(idOfUser);
+            _comment.dislikeList.splice(index, 1);
+            _comment.dislike -= 1;
+        }
+        if(_comment.likeList.includes(user_Indb._id)){
+            const index = _comment.likeList.indexOf(idOfUser);
+            console.log(index);
+            _comment.likeList.splice(index, 1);
+            _comment.like -= 1;
+        }else{
+            _comment.likeList.push(user_Indb._id);
+            _comment.like += 1;
+        }
+        const tam = await _comment.save();
+        return tam;
+    }
+
+    async updateDislike(id: string, user: any){
+        const _comment = await this.commentModel.findOne({_id: id});
+        const user_Indb = await this.userModel.findOne({
+            email: user.email,
+        }).exec();
+        const idOfUser = user_Indb._id;
+
+        if(_comment.likeList.includes(user_Indb._id)){
+            const index = _comment.likeList.indexOf(idOfUser);
+            _comment.likeList.splice(index, 1);
+            _comment.like -= 1;
+        }
+        if(_comment.dislikeList.includes(user_Indb._id)){
+            const index = _comment.dislikeList.indexOf(idOfUser);
+            _comment.dislikeList.splice(index, 1);
+            _comment.dislike -= 1;
+        }else{
+            _comment.dislikeList.push(user_Indb._id);
+            _comment.dislike += 1;
+        }
+        const tam = await _comment.save();
+        return tam;
+    }
+
 }   
 

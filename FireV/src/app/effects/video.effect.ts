@@ -1,4 +1,4 @@
-import { createVideoSucceed } from './../actions/video.action';
+import { createVideoSucceed, getVideoById } from './../actions/video.action';
 
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -9,7 +9,8 @@ import { from, switchMap, of, map, catchError } from 'rxjs';
 export class VideoEffect {
   constructor(
     private actions$: Actions,
-    private addVideoService: AddVideoService
+    private addVideoService: AddVideoService,
+
   ) { }
 
   uploadVideo$ = createEffect(() =>
@@ -50,6 +51,9 @@ export class VideoEffect {
           else if (video.hour >= 24) {
             video.timeUp = video.day.toString() + " ngày";
           }
+          let totalTime =  new Date(video.createdAt).toLocaleDateString();
+          video.createdAt = totalTime;
+          console.log(video.createdAt);
         });
         return VideoActions.getVideoSucceed({ video });
       }),
@@ -154,4 +158,40 @@ export class VideoEffect {
       )
     )
   );
+
+  getVideoByUserId$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(VideoActions.getVideoByUserId),
+      switchMap((action) => {
+        return this.addVideoService.getVideoByUserId(action.id, action.idToken);
+      }),
+      map((video) => {
+         video.forEach(async video => {
+          let total =  new Date(video.createdAt).toLocaleDateString();
+          video.createdAt = total;
+          console.log(video.createdAt);
+        })
+        return VideoActions.getVideoByUserIdSucceed({ video });
+      }),
+      catchError((error) =>
+        of(VideoActions.getVideoByUserIdFailed({ error: error }))
+    )
+  ));
+
+  deleteVideo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(VideoActions.deleteVideo),
+      switchMap((action) => {
+        return this.addVideoService.deleteVideo(action.id, action.idToken);
+      }),
+      map((video) => {
+        return VideoActions.deleteVideoSucceed({ video });
+      }),
+      catchError((error) =>
+        of(VideoActions.deleteVideoFailed({ error: error }))
+      )
+    )
+  );
+
+
 }

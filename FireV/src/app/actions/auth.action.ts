@@ -27,3 +27,7 @@ export const createUserFailure = createAction('[Auth] Create User Failure', prop
 export const updateSub = createAction('[Auth] Update Sub',props<{id: string, idToken:string}>());
 export const updateSubSuccess = createAction('[Auth] Update Sub Success', props<{ user: any }>());
 export const updateSubFailure = createAction('[Auth] Update Sub Failure', props<{ error: string }>());
+
+export const getUserById = createAction('[Auth] Get User By Id',props<{id: string}>());
+export const getUserByIdSuccess = createAction('[Auth] Get User By Id Success', props<{ user: any }>());
+export const getUserByIdFailure = createAction('[Auth] Get User By Id Failure', props<{ error: string }>());
