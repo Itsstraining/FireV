@@ -9,7 +9,6 @@ import { Video } from './video.schema';
 })
 export class Comment {
 
-
   @IsNotEmpty()
   @Prop()
   content: string;
@@ -23,8 +22,21 @@ export class Comment {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'videos' })
   video: Video;
 
-  @Prop({default: false})
+  @Prop({ default: 0 })
+  like: number;
+
+  @Prop({ default: 0 })
+  dislike: number;
+
+  @Prop({ default: false })
   isHidden: boolean;
+
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }] })
+  likeList: User[];
+
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }] })
+  dislikeList: User[];
+
 }
 export type CommentDocument = Comment & Document;
 export const CommentSchema = SchemaFactory.createForClass(Comment);

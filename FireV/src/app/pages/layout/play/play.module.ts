@@ -5,6 +5,7 @@ import { PlayRoutingModule } from './play-routing.module';
 import { PlayComponent } from './play.component';
 
 import { ShareModule } from 'src/app/modules/share/share.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,9 @@ import { ShareModule } from 'src/app/modules/share/share.module';
   imports: [
     CommonModule,
     PlayRoutingModule,
-    ShareModule
+    ShareModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PlayModule { }

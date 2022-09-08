@@ -1,3 +1,4 @@
+import { Auth, getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -9,7 +10,9 @@ import { AuthState } from 'src/app/states/auth.state';
 import { User } from 'src/app/models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarComponent } from '../../components/snack-bar/snack-bar.component';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as CommentActions from 'src/app/actions/comment.action';
+import { CommentState } from 'src/app/states/comment.state';
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
@@ -27,6 +30,8 @@ export class PlayComponent implements OnInit {
   idToken: string = '';
   userId$ = this.store.select((state) => state.auth._id);
   userId: any;
+  userAvatar$ = this.store.select((state) => state.auth.user);
+  userAvatar: any;
   author: User = <User>{};
   subUser: User = <User>{};
   like: number = 0;
@@ -39,10 +44,26 @@ export class PlayComponent implements OnInit {
   likeList: Array<string> = [];
   dislikeList: Array<string> = [];
   idOfAuthor: string = '';
+  photoURL: string | null = "";
+  form!: FormGroup;
+  btnSubmit: boolean = false;
+
+
+  isLikedComment: boolean = false;
+  isDislikedComment: boolean = false;
+  getCommentByVideoId$ = this.store.select((state) => state.comment.commentList);
+  authorComment: User = <User>{};
+  likeCom: number = 0;
+  dislikeCom: number = 0;
+  commentTam: User = <User>{};
+
+
   constructor(
     public route: ActivatedRoute,
-    private store: Store<{ video: VideoState; auth: AuthState }>,
-    private snackBar: MatSnackBar
+    private store: Store<{ video: VideoState; auth: AuthState, comment: CommentState }>,
+    private snackBar: MatSnackBar,
+    private auth: Auth,
+    private formBuilder: FormBuilder,
   ) {
     //const currentTime: Observable<number> = 0;
     //const totalTime: Observable<number> = 0;
@@ -50,6 +71,7 @@ export class PlayComponent implements OnInit {
     id.subscribe((id) => {
       this.store.dispatch(VideoActions.getVideoById({ id: id }));
       this.store.dispatch(VideoActions.getAllExceptId({ id: id }));
+      this.store.dispatch(CommentActions.getComment({ id: id }));
     });
 
     //get idtoken from user
@@ -63,15 +85,6 @@ export class PlayComponent implements OnInit {
       }
     });
 
-    // this.getSub$.subscribe((value) => {
-    //   if(value.subscribers != undefined && value.subscriberList != undefined){
-    //     this.subscriber = value.subscribers;
-    //     this.subscriberList = value.subscriberList;
-    //     console.log('sublist nè ' + this.subscriberList);
-    //     console.log('sub nè ' + this.subscriber);
-    //   }
-
-    // });
 
     this.playVideo$.subscribe((value) => {
       if (value != null && value != undefined) {
@@ -114,6 +127,17 @@ export class PlayComponent implements OnInit {
 
       }
     });
+
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.photoURL = user.photoURL;
+      }
+    });
+
+    this.form = this.formBuilder.group({
+      content: ['', Validators.required],
+    });
+
   }
 
   playVideo(id: string) {
@@ -221,6 +245,93 @@ export class PlayComponent implements OnInit {
     }
 
   }
+  handleError(e: any) {
+    console.log(e);
+    e.target.src = "../../../../../../../assets/images/user_crack.png";
+  }
 
+  createComment(idVideo: string ){
+    if(this.userId == ''){
+      this.snackBar.openFromComponent(SnackBarComponent, {
+        duration: 3000
+      });
+    }else{
+      let newForm = {
+        ...this.form.value,
+      };
+      this.store.dispatch(CommentActions.createComment({ id: idVideo, idToken: this.idToken, comment: newForm }));
+      this.form.reset();
+    }
+
+  }
+
+  openSubmit(event: any){
+
+    if(event.target.style.borderBottom == '1px solid black'){
+      console.log('open');
+      event.target.style.borderBottom = '1px solid #ccc';
+    }else{
+      console.log('open1');
+      event.target.style.borderBottom = '1px solid black';
+    }
+    this.btnSubmit = true;
+  }
+
+  closeSubmit(){
+    this.btnSubmit = false;
+  }
+
+
+
+  // updateLikeComment(commentId: string) {
+  //   if(this.userId == ''){
+  //     this.snackBar.openFromComponent(SnackBarComponent, {
+  //       duration: 3000
+  //     });
+  //   }
+  //  else{
+  //   if (this.isDislikedComment == false && this.isLikedComment == false) {
+  //     this.store.dispatch(CommentActions.updateLike({ id: commentId, idToken: this.idToken }));
+  //     this.like += 1;
+  //     this.isLiked = true;
+  //   }
+  //   else if (this.isDisliked == true && this.isLiked == false) {
+  //     this.store.dispatch(VideoActions.updateLikes({ id: videoId, idToken: this.idToken }));
+  //     this.dislike -= 1;
+  //     this.like += 1;
+  //     this.isLiked = true;
+  //     this.isDisliked = false;
+  //   } else if (this.isDisliked == false && this.isLiked == true) {
+  //     this.store.dispatch(VideoActions.updateUnlikes({ id: videoId, idToken: this.idToken }));
+  //     this.like -= 1;
+  //     this.isLiked = false;
+  //   }
+  //  }
+  // }
+  // updateDislikeComment(videoId: string) {
+  //   if(this.userId == ''){
+  //     this.snackBar.openFromComponent(SnackBarComponent, {
+  //       duration: 3000
+  //     });
+  //   }else{
+  //     if (this.isDisliked == false && this.isLiked == false) {
+  //       this.store.dispatch(VideoActions.updateDislikes({ id: videoId, idToken: this.idToken }));
+  //       this.dislike += 1;
+  //       this.isDisliked = true;
+  //     }
+  //     else if (this.isDisliked == false && this.isLiked == true) {
+  //       this.store.dispatch(VideoActions.updateDislikes({ id: videoId, idToken: this.idToken }));
+  //       this.dislike += 1;
+  //       this.like -= 1;
+  //       this.isLiked = false;
+  //       this.isDisliked = true;
+  //     } else if (this.isDisliked == true && this.isLiked == false) {
+  //       this.store.dispatch(VideoActions.updateUndislikes({ id: videoId, idToken: this.idToken }));
+  //       this.dislike -= 1;
+  //       this.isDisliked = false;
+  //     }
+  //   }
+
+  // }
 
 }

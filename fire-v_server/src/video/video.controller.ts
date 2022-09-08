@@ -65,4 +65,19 @@ export class VideoController {
   public async updateUndislike(@Query('id') id: string, @Req() req: any){
     return await this.videoService.updateDislike(id, req.user);
   }
+
+  @Get('author/path')
+  public async getVideoByAuthor(@Query('id') id: string, @Req() req: any){
+    return await this.videoService.getVideoByAuthorId(id, req.user);
+  }
+
+  @Delete('delete/path')
+  public async deleteVideo(@Query('id') id: string){
+    return await this.videoService.deleteVideo(id);
+  }
+
+  @Put('update/path')
+  public async updateVideoInfo( @Query('id') id: string, @Body() video: Video){
+    return await this.videoService.updateVideoInfo(id, video);
+  }
 }

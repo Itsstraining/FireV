@@ -16,7 +16,7 @@ export class UserController {
     return this.userService.findOne(req.user.email);
   }
 
-  @Get('/')
+  @Get('infor/path')
   public async getUserById(@Query(`id`) id: string) {
     console.log(id);
     return await this.userService.findByUserId(id);

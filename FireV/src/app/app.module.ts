@@ -27,6 +27,9 @@ import * as AuthActions from '../app/actions/auth.action';
 import { videoReducer } from './reducers/video.reducer';
 import { VideoEffect } from './effects/video.effect';
 import { SnackBarComponent } from './pages/components/snack-bar/snack-bar.component';
+import { CommentEffect } from './effects/comment.effect';
+import { commentReducer } from './reducers/comment.reducer';
+
 
 @NgModule({
   declarations: [
@@ -48,13 +51,15 @@ import { SnackBarComponent } from './pages/components/snack-bar/snack-bar.compon
       auth: authReducer,
       uploadImage: uploadImageReducer,
       uploadVideo: uploadVideoReducer,
-      video: videoReducer
+      video: videoReducer,
+      comment: commentReducer
     }, {}),
     EffectsModule.forRoot([
       AuthEffects,
       UploadImageEffect,
       UploadVideoEffect,
-      VideoEffect
+      VideoEffect,
+      CommentEffect
     ]),
     FormsModule,
     ReactiveFormsModule,
