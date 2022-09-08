@@ -1,6 +1,5 @@
 import { UploadVideoEffect } from './effects/uploadVideo.effect';
 import { UploadImageEffect } from './effects/uploadImage.effect';
-import { uploadImage } from './actions/uploadImage.action';
 import { ShareModule } from 'src/app/modules/share/share.module';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,10 +25,10 @@ import { AuthState } from './states/auth.state';
 import * as AuthActions from '../app/actions/auth.action';
 import { videoReducer } from './reducers/video.reducer';
 import { VideoEffect } from './effects/video.effect';
-import { SnackBarComponent } from './pages/components/snack-bar/snack-bar.component';
 import { CommentEffect } from './effects/comment.effect';
 import { commentReducer } from './reducers/comment.reducer';
-
+import { suggestionReducer } from './reducers/suggestion.reducer';
+import { SuggestionEffects } from './effects/suggestion.effect';
 
 @NgModule({
   declarations: [
@@ -52,14 +51,16 @@ import { commentReducer } from './reducers/comment.reducer';
       uploadImage: uploadImageReducer,
       uploadVideo: uploadVideoReducer,
       video: videoReducer,
-      comment: commentReducer
+      comment: commentReducer,
+      suggest: suggestionReducer
     }, {}),
     EffectsModule.forRoot([
       AuthEffects,
       UploadImageEffect,
       UploadVideoEffect,
       VideoEffect,
-      CommentEffect
+      CommentEffect,
+      SuggestionEffects
     ]),
     FormsModule,
     ReactiveFormsModule,
@@ -71,7 +72,13 @@ import { commentReducer } from './reducers/comment.reducer';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  idToken$ = this.store.select((state) => state.auth.idToken);
   constructor(private store: Store<{ auth: AuthState }>) {
     this.store.dispatch(AuthActions.getIdToken());
+    this.idToken$.subscribe((idToken) => {
+      if(idToken && idToken != ""){
+        this.store.dispatch(AuthActions.getUserId({ idToken: idToken }))
+      }
+    })
   }
 }

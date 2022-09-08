@@ -16,7 +16,8 @@ export class FileUploadService {
     return from(
       new Promise<string>(async (resolve, reject) => {
         try {
-          const storageRef = ref(this.storage, 'uploads/' + file.name);
+          const n = Date.now().toString();
+          const storageRef = ref(this.storage, 'uploads/' + n + '.jpg');
           const uploadTask = uploadBytesResumable(storageRef, file);
           // Listen for state changes, errors, and completion of the upload.
           uploadTask.on(

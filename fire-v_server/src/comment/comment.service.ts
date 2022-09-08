@@ -24,7 +24,7 @@ export class CommentService {
             }).exec();
             newComment.video = video_indb._id;
             const _comment = await newComment.save();
-            console.log(newComment);
+            // console.log(newComment);
             return _comment;
         }
         catch(err){
@@ -84,6 +84,10 @@ export class CommentService {
         }
         const tam = await _comment.save();
         return tam;
+    }
+
+    async deleteAllCommentFromVid(video_id:string){
+        await this.commentModel.deleteMany({video : Object(video_id)}).exec();
     }
 
 }   

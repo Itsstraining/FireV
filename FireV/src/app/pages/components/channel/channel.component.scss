@@ -46,10 +46,16 @@ body{
 .container1{
   // padding-left: 4.5%;
   height: 100vh;
-  width: 90%;
-  margin-left: 9.5%;
+  width: 100%;
+  margin-left: 10%;
   padding-right: 2%;
   padding-bottom: 20px;
+  .vid-info {
+    width: 350px;
+    margin-left: 2%;
+    float: right;
+    // padding-bottom: 11%;
+  }
 }
 .large-container{
   height: 100%;
@@ -219,7 +225,6 @@ main{
   width: 450px;
   margin-left: 2%;
   float: right;
-  flex-basis: 90%;
   // padding-bottom: 11%;
 }
 

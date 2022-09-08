@@ -4,7 +4,6 @@ import { join } from 'path';
 import { AuthService } from 'src/middleware/auth/auth.service';
 import { Video } from 'src/schemas/video.schema';
 import { VideoService } from './video.service';
-import type { Response } from 'express';
 
 @Controller('video')
 export class VideoController {
@@ -18,7 +17,7 @@ export class VideoController {
 
   @Get('play')
   public  getVideoByid(@Query('id') id: string){
-    console.log(id);
+    console.log('play video  with id: '+id);
       return this.videoService.findByVideoId(id);
   }
 
@@ -80,4 +79,6 @@ export class VideoController {
   public async updateVideoInfo( @Query('id') id: string, @Body() video: Video){
     return await this.videoService.updateVideoInfo(id, video);
   }
+
+
 }

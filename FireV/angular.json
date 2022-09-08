@@ -23,6 +23,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "@rajesh896/video-thumbnails-generator"
+            ],
             "outputPath": "dist/fire-v",
             "index": "src/index.html",
             "main": "src/main.ts",

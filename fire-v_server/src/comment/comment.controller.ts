@@ -9,6 +9,7 @@ export class CommentController {
   constructor(private readonly commentService: CommentService) {}
   @Post('send')
   public async createComment(@Body() comment: Comment, @Req() req: any, @Query('id') id: string){
+    console.log(`usser with email ${req.user.email}  has comment to the video id: ${id}`)
     return await this.commentService.createComment(comment, req.user, id);
   }
   @Get('video/path')

@@ -26,7 +26,6 @@ export class Video {
     @Prop([String])
     hashtags: string[];
 
-    @IsNotEmpty()
     @Prop()
     url: string;
 
@@ -34,7 +33,6 @@ export class Video {
     @Prop()
     image_url: string;
 
-    @IsNotEmpty()
     @Prop()
     type: string;
 

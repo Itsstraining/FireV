@@ -51,15 +51,13 @@ export class VideoEffect {
           else if (video.hour >= 24) {
             video.timeUp = video.day.toString() + " ngày";
           }
-          let totalTime =  new Date(video.createdAt).toLocaleDateString();
-          video.createdAt = totalTime;
-          console.log(video.createdAt);
         });
         return VideoActions.getVideoSucceed({ video });
       }),
       catchError((error) => of(VideoActions.getVideoFailed({ error: error })))
     )
   );
+
   getVideoById$ = createEffect(() =>
     this.actions$.pipe(
       ofType(VideoActions.getVideoById),
@@ -67,6 +65,36 @@ export class VideoEffect {
         return this.addVideoService.getVideoByIdDb(action.id);
       }),
       map((video) => {
+        let total = new Date().getTime() - new Date(video.createdAt).getTime();
+            let hourConvert  = Math.round((Math.floor((total) / 1000)) / 3600);
+            if (hourConvert > 24) {
+                if (hourConvert < 48) {
+                    video.timeUp = Math.round(hourConvert / 24).toString() + " ngày trước";
+                } else {
+                    video.timeUp = Math.round(hourConvert / 24).toString() + " ngày trước";
+                }
+            }
+            else if(hourConvert >= 1 ){
+                if (hourConvert == 1) {
+                    video.timeUp = hourConvert.toString() + " tiếng trước";
+                }
+                else {
+                    video.timeUp = hourConvert.toString() + " tiếng trước";
+                }
+            }
+            else if (hourConvert < 1) {
+                let minuteConvert = Math.round((Math.floor((total) / 1000)) / 3600 * 60);
+                if (minuteConvert < 1) {
+                    video.timeUp = Math.round((Math.floor((total) / 1000))).toString() + " giây trước";
+                } else {
+                    if (minuteConvert == 1) {
+                        video.timeUp = minuteConvert.toString() + " phút trước";
+                    }
+                    else {
+                        video.timeUp = minuteConvert.toString() + " phút trước";
+                    }
+                }
+            }
         return VideoActions.getVideoByIdSucceed({ video });
       }),
       catchError((error) =>
@@ -74,6 +102,7 @@ export class VideoEffect {
       )
     )
   );
+
   getAllVideoExceptId$ = createEffect(() =>
     this.actions$.pipe(
       ofType(VideoActions.getAllExceptId),

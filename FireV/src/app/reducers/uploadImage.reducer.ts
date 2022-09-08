@@ -16,9 +16,10 @@ export const uploadImageReducer = createReducer(
     let newState = {
       ...state,
       isLoading: true,
+      isSuccess: false,
       fileUp: action.files,
     };
-    console.log(action.type,newState);
+    console.log(action.type);
     return newState;
   }),
   on(UploadImageActions.uploadImageSucceed, (state, action) => {

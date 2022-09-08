@@ -14,7 +14,7 @@ export const authReducer = createReducer(
   initialState,
   /////////////////////////////////////////////////////////////
   on(AuthActions.login, (state,action) => {
-    console.log(action.type);
+    // console.log(action.type);
     return state
   }),
   on(AuthActions.loginSuccess, (state, action) => {
@@ -23,7 +23,7 @@ export const authReducer = createReducer(
       isAuthenticated: true,
       idToken: action.idToken,
     };
-    console.log(action.type);
+    // console.log(action.type);
     return newState;
   }),
 
@@ -32,13 +32,13 @@ export const authReducer = createReducer(
       ...state,
       error: action.error,
     };
-    console.log(newState);
+    // console.log(newState);
     return newState;
   }),
 
   ////////////////////////////////////////////////////////////////////
   on(AuthActions.logOut, (state,action) => {
-    console.log(action.type);
+    // console.log(action.type);
     return state
   }),
   on(AuthActions.logOutSuccess, (state, action) => {
@@ -48,11 +48,12 @@ export const authReducer = createReducer(
       _id: '',
       isAuthenticated: false,
     };
-    console.log(action.type);
+    // console.log(action.type);
     return newState;
   }),
   on(AuthActions.logOutFailure, (state, action) => {
     let newState = {
+      
       ...state,
       error: action.error,
     };
@@ -62,7 +63,7 @@ export const authReducer = createReducer(
 
   ///////////////////////////////////////////////////////////////////
   on(AuthActions.createUser, (state, action) => {
-    console.log(action.type);
+    // console.log(action.type);
     return state;
   }),
   on(AuthActions.createUserSuccess, (state, action) => {
@@ -71,7 +72,7 @@ export const authReducer = createReducer(
       isAuthenticated: true,
       user: action.user
     }
-    console.log(newState.user);
+    // console.log(newState.user);
     return newState;
   }), on(AuthActions.createUserFailure, (state, action) => {
     let newState = {
@@ -79,12 +80,12 @@ export const authReducer = createReducer(
       error: action.error
     }
     console.log(newState);
-    return state;
+    return newState;
   }),
 
   ///////////////////////////////////////////////////////////////////
   on(AuthActions.getIdToken, (state, action) => {
-    console.log(action.type);
+    // console.log(action.type);
     return state;
   }),
   on(AuthActions.getIdTokenSuccess, (state, action) => {
@@ -93,15 +94,15 @@ export const authReducer = createReducer(
       isAuthenticated: true,
       idToken: action.idToken,
     }
-    console.log(action.idToken);
+    // console.log(action.idToken);
     return newState;
   }), on(AuthActions.getIdTokenFailure, (state, action) => {
     let newState = {
       ...state,
       error: action.error
     }
-    console.log(newState);
-    return state;
+    // console.log(newState);
+    return newState;
   }),
 
   /////////////////////////////////////////////////////////////

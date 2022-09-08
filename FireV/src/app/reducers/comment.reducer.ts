@@ -14,7 +14,7 @@ const initialState: CommentState ={
 export const commentReducer = createReducer(
     initialState,
     on(CommentActions.createComment, (state, action) => {
-        console.log(action.type)
+        // console.log(action.type)
         return {
             ...state,
             isLoading: true,
@@ -30,7 +30,7 @@ export const commentReducer = createReducer(
             isLoading: false,
             commentLoad: <Comment>{}
         }
-        console.log(action.type, action.comment);
+        // console.log(action.type, action.comment);
         return newState;
     }),
     on(CommentActions.createCommentFailed, (state, action) => {
