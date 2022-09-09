@@ -9,10 +9,6 @@ export interface Comment{
     commentList: Comment[];
     isHidden: boolean;
     timeUp: string;
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
     likeList: string[];
     dislikeList: string[];
     like: number;

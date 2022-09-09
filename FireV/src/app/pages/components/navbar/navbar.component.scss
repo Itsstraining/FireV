@@ -17,13 +17,54 @@ nav{
     top: 0;
     z-index: 10;
     height: 80px;
+    position: fixed;
+}
+#myUL {
+    top: 70px;
+    width: 225px;
     position: absolute;
-    // position: fixed;
-    overflow: hidden;
+    z-index: 10;
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    margin-right: 15px;
+    padding: 8px 12px;
+    border-radius: 25px;
+    background-color: #121f26;
+
 }
 
+#myUL li a {
+    // border-bottom: 1px solid #ddd;
+    /* Add a border to all links */
+    margin-top: -1px;
+    /* Prevent double borders */
+    background-color: #121f26;
+    /* Grey background color */
+    padding: 12px;
+    /* Add some padding */
+    text-decoration: none;
+    /* Remove default text underline */
+    font-size: 14px;
+    /* Increase the font-size */
+    color: white;
+    /* Add a black text color */
+    display: block;
+    width: 100%;
+    /* Make it into a block element to fill the whole list */
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+    border-radius: 8px;
+    color: #121f26;
+    cursor: pointer;
+    /* Add a hover effect to all links, except for headers */
+}
 .nav-right{
     .action{
         position: relative;

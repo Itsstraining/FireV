@@ -12,17 +12,19 @@ const initialState: VideoState = {
   videoLoad: <Video>{},
   isLoading: false,
   idToken: '',
-  _id: ''
+  _id: '',
+  isSuccess: false
 };
 
 export const videoReducer = createReducer(
   initialState,
   on(VideoActions.createVideo, (state, action) => {
-    console.log(action.type)
+    // console.log(action.type)
     return {
       ...state,
       isLoading: true,
       idToken: action.idToken,
+      isSucces: false,
       videoLoad: action.video
     }
   }),
@@ -30,9 +32,11 @@ export const videoReducer = createReducer(
     let newState = {
       ...state,
       isLoading: false,
-      videoLoad: <Video>{}
+      isSuccess: true,
+      idToken: '',
+      videoLoad: action.video
     }
-    console.log(action.type, action.video);
+    // console.log(action.type, action.video);
     return newState;
   }),
   on(VideoActions.createVideoFailed, (state, action) => {
@@ -40,11 +44,12 @@ export const videoReducer = createReducer(
     return {
       ...state,
       error: action.error,
-      isLoading: false
+      isLoading: false,
+      isSuccess: false
     }
   }),
   on(VideoActions.getVideo, (state, action) => {
-    console.log(action.type)
+    // console.log(action.type)
     return {
       ...state,
       isLoading: true,
@@ -56,11 +61,11 @@ export const videoReducer = createReducer(
       isLoading: false,
       videoList: action.video
     }
-    console.log(action.video);
+    // console.log(action.video);
     return newState;
   }),
   on(VideoActions.getVideoFailed, (state, action) => {
-    console.log(action.error, action)
+    console.log(action.error)
     return {
       ...state,
       error: action.error,
@@ -68,7 +73,7 @@ export const videoReducer = createReducer(
     }
   }),
   on(VideoActions.getVideoById, (state, action) => {
-    console.log(action.id)
+    // console.log(action.id)
     return {
       ...state,
       isLoading: true,
@@ -82,7 +87,7 @@ export const videoReducer = createReducer(
       videoLoad: action.video,
       _id: "",
     }
-    console.log(action.video);
+    // console.log(action.video);
     return newState;
   }),
   on(VideoActions.getVideoByIdFailed, (state, action) => {
@@ -109,7 +114,7 @@ export const videoReducer = createReducer(
       videoList: action.video,
       _id: "",
     }
-    console.log(action.video);
+    // console.log(action.video);
     return newState;
   }),
   on(VideoActions.getAllExceptIdFailed, (state, action) => {
@@ -122,7 +127,7 @@ export const videoReducer = createReducer(
     }
   }),
   on(VideoActions.updateViews, (state, action) => {
-    console.log(action.id)
+    // console.log(action.id)
     return {
       ...state,
       isLoading: true,
@@ -138,7 +143,7 @@ export const videoReducer = createReducer(
       // videoLoad : action.video,
       _id: "",
     }
-    console.log(action.type);
+    // console.log(action.type);
     return newState;
   }),
   on(VideoActions.updateViewsFailed, (state, action) => {
@@ -151,7 +156,7 @@ export const videoReducer = createReducer(
     }
   }),
   on(VideoActions.updateLikes, (state, action) => {
-    console.log(action.type)
+    // console.log(action.type)
     return {
       ...state,
       isLoading: true,
@@ -166,7 +171,7 @@ export const videoReducer = createReducer(
       isLoading: false,
       _id: "",
     }
-    console.log(action.type);
+    // console.log(action.type);
     return newState;
   }),
   on(VideoActions.updateLikesFailed, (state, action) => {
@@ -179,7 +184,7 @@ export const videoReducer = createReducer(
     }
   }),
   on(VideoActions.updateDislikes, (state, action) => {
-    console.log(action.type)
+    // console.log(action.type)
     return {
       ...state,
       isLoading: true,
@@ -194,11 +199,11 @@ export const videoReducer = createReducer(
       isLoading: false,
       _id: "",
     }
-    console.log(action.type);
+    // console.log(action.type);
     return newState;
   }),
   on(VideoActions.updateDislikesFailed, (state, action) => {
-    console.log(action.error)
+    // console.log(action.error)
     return {
       ...state,
       error: action.error,
@@ -207,7 +212,7 @@ export const videoReducer = createReducer(
     }
   }),
   on(VideoActions.updateUnlikes, (state, action) => {
-    console.log(action.type)
+    // console.log(action.type)
     return {
       ...state,
       isLoading: true,
@@ -222,11 +227,11 @@ export const videoReducer = createReducer(
       isLoading: false,
       _id: "",
     }
-    console.log(action.type);
+    // console.log(action.type);
     return newState;
   }),
   on(VideoActions.updateUnlikesFailed, (state, action) => {
-    console.log(action.error)
+    // console.log(action.error)
     return {
       ...state,
       error: action.error,
@@ -235,7 +240,7 @@ export const videoReducer = createReducer(
     }
   }),
   on(VideoActions.updateUndislikes, (state, action) => {
-    console.log(action.type)
+    // console.log(action.type)
     return {
       ...state,
       isLoading: true,
@@ -250,7 +255,7 @@ export const videoReducer = createReducer(
       isLoading: false,
       _id: "",
     }
-    console.log(action.type);
+    // console.log(action.type);
     return newState;
   }),
   on(VideoActions.updateUndislikesFailed, (state, action) => {
@@ -263,7 +268,7 @@ export const videoReducer = createReducer(
     }
   }),
   on(VideoActions.getVideoByUserId, (state, action) => {
-    console.log(action.id)
+    // console.log(action.id)
     return {
       ...state,
       isLoading: true,
@@ -278,7 +283,7 @@ export const videoReducer = createReducer(
       videoList: action.video,
       _id: "",
     }
-    console.log(action.video);
+    // console.log(action.video);
     return newState;
   }),
   on(VideoActions.getVideoByUserIdFailed, (state, action) => {
@@ -291,7 +296,7 @@ export const videoReducer = createReducer(
     }
   }),
   on(VideoActions.deleteVideo, (state, action) => {
-    console.log(action.id)
+    // console.log(action.id)
     return {
       ...state,
       isLoading: true,
@@ -306,7 +311,7 @@ export const videoReducer = createReducer(
       videoLoad: action.video,
       _id: "",
     }
-    console.log(action.video);
+    // console.log(action.video);
     return newState;
   }),
   on(VideoActions.deleteVideoFailed, (state, action) => {

@@ -4,13 +4,17 @@ import { AuthState } from 'src/app/states/auth.state';
 import * as AuthActions from 'src/app/actions/auth.action';
 import { Auth, getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { InteractService } from './../../../services/interact.service';
+import * as SuggestionActions from '../../../actions/suggestion.action';
+import { SuggestionState } from 'src/app/states/suggestion.state';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  resultShow !: boolean;
   isShown: boolean = false; // hidden by default
 
   displayName: string | null = "";
@@ -18,8 +22,9 @@ export class NavbarComponent implements OnInit {
 
   token: string = "";
   idToken$ = this.store.select((state) => state.auth.idToken)
+  searchResult$ = this.store.select((state) => state.suggest);
 
-  constructor(private store: Store<{ auth: AuthState }>,
+  constructor(private store: Store<{ auth: AuthState, suggest : SuggestionState }>,
     private router: Router,
     private auth: Auth,
   ) {
@@ -67,5 +72,34 @@ export class NavbarComponent implements OnInit {
   }
   goToChannel(){
     this.router.navigateByUrl('channel');
+  }
+
+  
+  filterTextChanged: Subject<string> = new Subject<string>();
+  // debounce filter text changes
+  onFilterTextChanged(e: any) {
+    if(e.target.value == ""){
+      this.resultShow = false;
+    }else{
+      this.resultShow = true;
+    }
+    if (this.filterTextChanged.observers.length === 0) {
+      this.filterTextChanged
+        .pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe(filterQuery => {
+          this.loadData(filterQuery);
+        });
+    }
+    this.filterTextChanged.next(e.target.value);
+  }
+
+  loadData(filterQuery: string) {
+    if (filterQuery) {
+      this.store.dispatch(SuggestionActions.searching({keyword:filterQuery}))
+    }
+  }
+  playVideo(videoId:string){
+    
+    window.location.href = `/play?id=${videoId}`
   }
 }

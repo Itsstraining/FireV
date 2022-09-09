@@ -7,7 +7,6 @@ import { Video, VideoSchema } from 'src/schemas/video.schema';
 import { User, UserSchema } from 'src/schemas/user.schema';
 import { UserModule } from 'src/user/user.module';
 import { VideoModule } from 'src/video/video.module';
-import { VideoService } from 'src/video/video.service';
 import { AuthService } from 'src/middleware/auth/auth.service';
 
 @Module({
@@ -19,6 +18,7 @@ import { AuthService } from 'src/middleware/auth/auth.service';
     forwardRef(() => VideoModule),
   ],
   controllers: [CommentController],
-  providers: [CommentService, VideoService, AuthService]
+  providers: [CommentService, AuthService],
+  exports: [CommentService]
 })
 export class CommentModule {}

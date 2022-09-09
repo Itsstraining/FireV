@@ -17,12 +17,12 @@ export class UploadVideoEffect {
       switchMap((action) => {
         let formData = new FormData();
         formData.append('video', action.files);
-        return this.videoUploadService.addVideo(formData,action.idToken);
+        return this.videoUploadService.uploadVideo(action.idToken,formData,action.video_id);
       }),
       map((filepath: any) => {
         // console.log('Test ' + filepath['path']);
         return UploadVideoActions.uploadVideoSucceed({
-          filepath: filepath['path'].toString(),
+          filepath: filepath['filename'].toString(),
         });
       }),
       catchError((error) => {

@@ -25,7 +25,12 @@ export class SideBarComponent implements OnInit {
   goToChannelPage(){
     this.router.navigateByUrl('channel');
   }
-  turnMenu() {
-    this.interactService.turnMenu();
+  turnMenu(e:any) {
+    if(e.target.checked){
+      this.interactService.turnOn();
+    }else{
+      this.interactService.turnOff();
+    }
+
   }
 }

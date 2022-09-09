@@ -7,10 +7,13 @@ import { VideoModule } from './video/video.module';
 
 import { MongooseModule } from '@nestjs/mongoose';
 import databaseConfig from './configs/database.config';
-import { UserController } from './user/user.controller';
 import { CommentModule } from './comment/comment.module';
 import { AuthService } from './middleware/auth/auth.service';
 import { AuthMiddleware } from './middleware/auth/auth.middleware';
+import { MediaModule } from './media/media.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { SuggestionModule } from './suggestion/suggestion.module';
 
 
 @Module({
@@ -19,7 +22,12 @@ import { AuthMiddleware } from './middleware/auth/auth.middleware';
     UserModule, 
     VideoModule, 
     CommentModule, 
-    UploadModule
+    UploadModule, 
+    MediaModule, 
+    SuggestionModule,
+    // ServeStaticModule.forRoot({
+    //   rootPath: join('uploads/videos/cvt'),
+    // }),
 
   ],
   controllers: [AppController],
@@ -37,6 +45,9 @@ export class AppModule implements NestModule{
         { path: 'video/views/(.*)', method: RequestMethod.PUT },
         { path: 'comment/video/(.*)', method: RequestMethod.GET },
         { path: 'user/infor/(.*)', method: RequestMethod.GET },
+        { path: 'suggestion/search', method: RequestMethod.GET },
+        'uploads/videos/cvt/(.*)',
+
         // { path: 'video/likes/(.*)', method: RequestMethod.PUT },
       //   // { path: 'video/all/vid', method: RequestMethod.GET },
       //   // { path: 'video/one/', method: RequestMethod.GET },

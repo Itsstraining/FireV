@@ -12,6 +12,7 @@ import * as VideoActions from 'src/app/actions/video.action';
 import { AuthState } from 'src/app/states/auth.state';
 import { Video } from 'src/app/models/video.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { generateVideoThumbnails } from '@rajesh896/video-thumbnails-generator';
 @Component({
   selector: 'app-add-video',
   templateUrl: './add-video.component.html',
@@ -19,25 +20,27 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AddVideoComponent implements OnInit {
 
-  isUploading: boolean = false;
+  
+  isEmpty: boolean = false;
 
-  public file: any = {};
-  public video: any = {};
+  isvideoInfoCreate$ = this.store.select((state) => state.video);
 
-  videoUrl$ = this.store.select((state) => state.uploadVideo.filepath);
-  imageUrl$ = this.store.select((state) => state.uploadImage.filepath);
+  videoFiles: File[] = [];
+  imageFiles: File[] = [];
+  testImageFiles: string[] = [];
+
+
+  // videoUrl$ = this.store.select((state) => state.uploadVideo.filepath);
+  imageUrl$ = this.store.select((state) => state.uploadImage);
 
   idToken$ = this.store.select((state) => state.auth.idToken);
   token: string = "";
-
-  progressUp: number = 0;
-  imageflag: boolean = false;
-  videoflag: boolean = false;
-  form!: FormGroup;
+  videoUploadForm !: FormGroup;
+  showSpinner = false;
+  // rejectedFiles: RejectedFile[] = [];
 
   constructor(
     private _snackBar: MatSnackBar,
-    private router: Router,
     private formBuilder: FormBuilder,
     private store: Store<{
       uploadImage: UploadImageState,
@@ -53,108 +56,155 @@ export class AddVideoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
+    this.videoUploadForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      type: ['', Validators.required],
-      isHidden: ['', Validators.required],
-      hashtags: ['', Validators.required],
+      hashtags: [''],
     });
 
-  }
+    this.isvideoInfoCreate$.subscribe(value => {
+      if (value.isSuccess == true) {
+        this.store.dispatch(UploadVideoActions.uploadVideos({ idToken: this.token, files: this.videoFiles[0] , video_id: value.videoLoad._id}))
+        this.showSpinner = false;
+        this._snackBar.open("Upload is processing,", "close", {
+          duration: 3000,
+          horizontalPosition: 'left',
+          verticalPosition: 'bottom',
+        });
+        this.resetForm();
+      }
+    })
 
-  backToChannel() {
-    this.router.navigateByUrl('channel');
-  }
-
-  selectFile(event: any) {
-    this.file = event.target.files[0];
-    console.log(this.file)
-    if (this.file.type.includes('image')) {
-      this.imageflag = true;
-    } else {
-      this.videoflag = false;
-      console.log(this.videoflag)
-    }
-  }
-
-  selectVideo(event: any) {
-    this.video = event.target.files[0];
-    console.log(this.video)
-    if (this.video.type.includes('video')) {
-      this.videoflag = true;
-    } else {
-      this.videoflag = false;
-      console.log(this.videoflag)
-    }
-  }
-
-  resetForm() {
-    this.form.reset(this.form);
-    this.file = {};
-    this.video = {};
-  }
-
-  async addData() {
-    let hashtags = [];
-    this.isUploading = true;
-    if (!this.video) {
-      alert('file video nhập vào bị trống');
-      this.isUploading = false;
-      return
-    } else {
-      if (this.imageflag == true && this.videoflag == true) {
-        this.store.dispatch(UploadImageActions.uploadImage({ files: this.file }));
-        this.store.dispatch(UploadVideoActions.uploadVideos({ files: this.video, idToken: this.token }));
-
-        let form = this.form.value;
+    this.imageUrl$.subscribe(value => {
+      if(value.isSuccess == true){
+        let thumbUrl = value.filepath;
+        let hashtags = [];
+        // let videoPath = value;
+        // videoFormData.append('video', this.videoFiles[0]);
+        // let videoPath = await this.httpService.addVideo(this.token, videoFormData);
+        // thumbFormData.append('thumbnail', this.imageFiles[0]);
+        // let imagePath = await this.httpService.addThumb(this.token, thumbFormData);
+  
+        let form = this.videoUploadForm.value;
         let description = form.description.replace(/\n/g, "<br>");
-        let imagePath = "";
-        let videoPath = "";
-
+        // console.log(description);
+  
         if (form.hashtags) {
           // console.log(form.hashtags);
           hashtags = form.hashtags.trim();
           hashtags = hashtags.split(" ");
-          console.log(hashtags);
+          // console.log(hashtags);
         }
-        let newForm = {
+  
+        let newForm : Video = {
           ...form,
+          description: description,
+          // url: videoPath,
+          image_url: thumbUrl,
           hashtags: hashtags,
-          description: description
-        };
-
-        this.videoUrl$.subscribe(async (value) => {
-          if (value) {
-            videoPath = value;
-            this.imageUrl$.subscribe((value) => {
-              if (value) {
-                imagePath = value,
-                  newForm = {
-                    ...newForm,
-                    image_url: imagePath,
-                    url: videoPath
-                  }
-                this.store.dispatch(VideoActions.createVideo({ idToken: this.token, video: newForm }));
-                // this.progressUp = 100;
-                this.isUploading = false;
-                this._snackBar.open("Upload successful!!!", "close", {
-                  duration: 3000,
-                  horizontalPosition: 'left',
-                  verticalPosition: 'bottom',
-                });
-              }
-            })
-          }
-        })
-
-
-      } else {
-        alert('file nhập vào không đúng kiểu');
-        this.isUploading = false;
-        return
+          isHidden: true,
+        }
+  
+        // console.log(newForm);
+        // let video = await this.httpService.createVideoInfo(this.token, newForm);
+        // console.log(video);\
+        this.store.dispatch(VideoActions.createVideo({ idToken: this.token, video: newForm }));
       }
+    })
+  }
+
+
+
+  resetForm() {
+    this.videoUploadForm.reset(this.videoUploadForm);
+    this.videoFiles.length = 0;
+    this.imageFiles.length = 0;
+    this.testImageFiles.length = 0;
+  }
+
+  async add() {
+    // const videoFormData: FormData = new FormData();
+    // const thumbFormData: FormData = new FormData();
+    if (this.videoFiles[0] && this.imageFiles[0]) {
+      this.showSpinner = true;
+      this.store.dispatch(UploadImageActions.uploadImage({ files :  this.imageFiles[0]}));
+    } else {
+      alert('Files are emptied');
+      return
     }
-    this.resetForm();
+  }
+
+  onVideoSelect(event: { addedFiles: any; rejectedFiles: any }) {
+    // console.log(event);
+    this.isEmpty = true;
+    if (event.addedFiles.length > 0) {
+      if (this.videoFiles.length > 0) {
+        this.videoFiles.shift();
+        // console.log(this.videoFiles);
+      }
+      this.videoFiles.push(...event.addedFiles);
+      this.convertThumb();
+      console.log(this.videoFiles);
+    } else {
+      // this.rejectedFiles.push(...event.rejectedFiles);
+      // console.log(this.rejectedFiles);
+      alert(`Your uploading file is reject due to: ${event.rejectedFiles[0].reason}`);
+    }
+  }
+
+  onVideoRemove(event: File) {
+    console.log(event);
+    this.testImageFiles.length = 0;
+    this.videoFiles.splice(this.videoFiles.indexOf(event), 1);
+  }
+
+  onImageSelect(event: { addedFiles: any; rejectedFiles: any }) {
+    // console.log(event);
+    if (event.addedFiles.length > 0) {
+      if (this.imageFiles.length > 0) {
+        this.imageFiles.shift();
+        console.log(this.imageFiles);
+      }
+      this.imageFiles.push(...event.addedFiles);
+      console.log(this.imageFiles);
+    } else {
+      // this.rejectedFiles.push(...event.rejectedFiles);
+      // console.log(this.rejectedFiles);
+      alert(`Your uploading file is reject due to: ${event.rejectedFiles[0].reason}`);
+    }
+  }
+
+  onImageRemove(event: File) {
+    console.log(event);
+    this.imageFiles.splice(this.imageFiles.indexOf(event), 1);
+  }
+
+  convertThumb() {
+    let videoFile = this.videoFiles[0];
+    this.isEmpty = true;
+    generateVideoThumbnails(videoFile, 2, 'jpg').then((thumbnailArray: string[]) => {
+      // output will be arry of base64 Images
+      // example - ["img1", "imgN"]
+
+      // let convertedFiles = thumbnailArray.map((fileBase64, index) => {
+      //   let fileType = fileBase64.substring(
+      //     fileBase64.indexOf(":") + 1,
+      //     fileBase64.lastIndexOf(";")
+      //   );
+      //   console.log(fileType)
+      //   let fileExtension = fileType.split('/');
+      //   return new File([fileBase64], `thumb${index}.${fileExtension[1]}`, {type: fileType});
+      // });
+      // console.log(convertedFiles);
+      // console.log(thumbnailArray);
+
+      this.testImageFiles = thumbnailArray;
+      this.isEmpty = false;
+      return thumbnailArray;
+      // @todo - implement your logic here
+    }).catch((err: any) => {
+      console.error(err);
+    })
+
   }
 }

@@ -1,6 +1,6 @@
 import { Auth, getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { VideoState } from 'src/app/states/video.state';
@@ -13,15 +13,17 @@ import { SnackBarComponent } from '../../components/snack-bar/snack-bar.componen
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as CommentActions from 'src/app/actions/comment.action';
 import { CommentState } from 'src/app/states/comment.state';
+import { HlsService } from 'src/app/services/hls.service';
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.scss'],
 })
 export class PlayComponent implements OnInit {
-  videoDuration: any;
-  currentTime: number = 0;
-  totalTime: number = 0;
+
+  //hls source testing
+  source: string = "";
+
 
   playVideo$ = this.store.select((state) => state.video.videoLoad);
   getAllExceptId$ = this.store.select((state) => state.video.videoList);
@@ -59,6 +61,8 @@ export class PlayComponent implements OnInit {
 
 
   constructor(
+    public hlsService: HlsService,
+    public router: Router,
     public route: ActivatedRoute,
     private store: Store<{ video: VideoState; auth: AuthState, comment: CommentState }>,
     private snackBar: MatSnackBar,
@@ -94,6 +98,13 @@ export class PlayComponent implements OnInit {
         console.log('Author id nè ' + this.author._id);
       }
       if (value.like != undefined && value.dislike != undefined) {
+        this.source = `http://127.0.0.1:3000/${value.url}-conv/main.m3u8`
+        // this.source = `http://127.0.0.1:5000/1662479356341-523049444.mp4-conv/main.m3u8`
+        let audioControl = document.getElementById('video');
+        this.hlsService.hls.loadSource(this.source)
+        if (audioControl != null) {
+          this.hlsService.hls.attachMedia(audioControl as HTMLMediaElement)
+        }
         this.like = value.like;
         this.dislike = value.dislike;
         this.subscriber = value.author.subscribers;
@@ -115,15 +126,15 @@ export class PlayComponent implements OnInit {
       if (value) {
         this.userId = value;
         console.log('User id nè ' + this.userId);
-          if (this.likeList.includes(this.userId)) {
-            this.isLiked = true;
-          } else if (this.dislikeList.includes(this.userId)) {
-            this.isDisliked = true;
-          }
-          if (this.subscriberList.includes(this.userId)) {
-            console.log('sublist nè ' + this.subscriberList);
-            this.isSubscribed = true;
-          }
+        if (this.likeList.includes(this.userId)) {
+          this.isLiked = true;
+        } else if (this.dislikeList.includes(this.userId)) {
+          this.isDisliked = true;
+        }
+        if (this.subscriberList.includes(this.userId)) {
+          console.log('sublist nè ' + this.subscriberList);
+          this.isSubscribed = true;
+        }
 
       }
     });
@@ -141,71 +152,99 @@ export class PlayComponent implements OnInit {
   }
 
   playVideo(id: string) {
-    // this.router.navigateByUrl(`/play?id=${id}`);
-    window.location.href = `/play?id=${id}`;
+    this.router.navigateByUrl(`/play?id=${id}`);
+    // window.location.href = `/play?id=${id}`;
   }
 
-  setCurrentTime(event: any) {
-    this.currentTime = event.target.currentTime.toFixed(3);
-    this.totalTime = event.target.duration;
-    //  console.log(this.currentTime);
-    const id: Observable<string> = this.route.queryParams.pipe(
-      map((p) => p['id'])
-    );
-    id.subscribe((id) => {
-      const video: Observable<any> = this.route.queryParams.pipe(
-        map((p) => p['video'])
-      );
-      video.subscribe((video) => {
+  //count time to plus 1 view///////////////////////////////////////////////////////////////////////
+  timeOutId: NodeJS.Timeout | undefined = undefined;
+  isCount: boolean = false;
+  totalTime: number = 0;
+  timePlay: number = 0;
+  duration: number = 0;
 
-        if (this.author._id != this.userId) {
+  predictTimeToCount(event: any, videoId: string) {
+    this.duration = Math.floor(event.target.duration);
+    this.timePlay = Date.now();
+    console.log(`time has played: ${this.totalTime / 1000} s`);
+    if (this.totalTime == 0) {
+      this.timeOutId = setTimeout(() => {
+        if (this.isCount == false) {
+          this.playVideo$.subscribe((video) => {
+            if (video.author._id != this.userId) {
+              this.isCount = !this.isCount;
+              console.log("+1");
+              this.store.dispatch(VideoActions.updateViews({ id: videoId, video }));
 
-          if (this.currentTime > ((this.totalTime * 60) / 100.0) && this.currentTime < (((this.totalTime * 60) / 100.0) + 0.2)) {
-            this.store.dispatch(
-              VideoActions.updateViews({ id: id, video: video })
-            );
-          }
+            }
+          })
         }
-
-        // console.log(this.totalTime);
-        // console.log((this.totalTime * 60)/100.0);
-
-        // console.log(this.currentTime);
-      });
-    });
+      }, (this.duration * 0.6) * 1000)
+    }
+    if (this.totalTime > 0) {
+      this.timeOutId = setTimeout(() => {
+        if (this.isCount == false) {
+          this.playVideo$.subscribe((video) => {
+            if (video.author._id != this.userId) {
+              this.isCount = !this.isCount;
+              console.log("+1");
+              this.store.dispatch(VideoActions.updateViews({ id: videoId, video }));
+            }
+          })
+        }
+      }, this.duration * 0.6 * 1000 - this.totalTime)
+    }
   }
+  resetCountable() {
+    if (this.isCount == true) {
+      clearTimeout(this.timeOutId);
+      this.isCount = !this.isCount;
+      this.totalTime = 0;
+    } else {
+      clearTimeout(this.timeOutId);
+      this.totalTime = 0;
+    }
+  }
+  stopCountingTime() {
+    clearTimeout(this.timeOutId);
+    this.totalTime += Date.now() - this.timePlay;
+  }
+
+
+
+
 
   updateLike(videoId: string) {
-    if(this.userId == ''){
+    if (this.userId == '') {
       this.snackBar.openFromComponent(SnackBarComponent, {
         duration: 3000
       });
     }
-   else{
-    if (this.isDisliked == false && this.isLiked == false) {
-      this.store.dispatch(VideoActions.updateLikes({ id: videoId, idToken: this.idToken }));
-      this.like += 1;
-      this.isLiked = true;
+    else {
+      if (this.isDisliked == false && this.isLiked == false) {
+        this.store.dispatch(VideoActions.updateLikes({ id: videoId, idToken: this.idToken }));
+        this.like += 1;
+        this.isLiked = true;
+      }
+      else if (this.isDisliked == true && this.isLiked == false) {
+        this.store.dispatch(VideoActions.updateLikes({ id: videoId, idToken: this.idToken }));
+        this.dislike -= 1;
+        this.like += 1;
+        this.isLiked = true;
+        this.isDisliked = false;
+      } else if (this.isDisliked == false && this.isLiked == true) {
+        this.store.dispatch(VideoActions.updateUnlikes({ id: videoId, idToken: this.idToken }));
+        this.like -= 1;
+        this.isLiked = false;
+      }
     }
-    else if (this.isDisliked == true && this.isLiked == false) {
-      this.store.dispatch(VideoActions.updateLikes({ id: videoId, idToken: this.idToken }));
-      this.dislike -= 1;
-      this.like += 1;
-      this.isLiked = true;
-      this.isDisliked = false;
-    } else if (this.isDisliked == false && this.isLiked == true) {
-      this.store.dispatch(VideoActions.updateUnlikes({ id: videoId, idToken: this.idToken }));
-      this.like -= 1;
-      this.isLiked = false;
-    }
-   }
   }
   updateDislike(videoId: string) {
-    if(this.userId == ''){
+    if (this.userId == '') {
       this.snackBar.openFromComponent(SnackBarComponent, {
         duration: 3000
       });
-    }else{
+    } else {
       if (this.isDisliked == false && this.isLiked == false) {
         this.store.dispatch(VideoActions.updateDislikes({ id: videoId, idToken: this.idToken }));
         this.dislike += 1;
@@ -227,12 +266,12 @@ export class PlayComponent implements OnInit {
   }
 
   updateSubcribe(authorId: string) {
-    if(this.author._id != this.userId){
-      if(this.userId == ''){
+    if (this.author._id != this.userId) {
+      if (this.userId == '') {
         this.snackBar.openFromComponent(SnackBarComponent, {
           duration: 3000
         });
-      }else{
+      } else {
         this.store.dispatch(AuthActions.updateSub({ id: authorId, idToken: this.idToken }));
         if (this.isSubscribed == false) {
           this.subscriber += 1;
@@ -250,12 +289,17 @@ export class PlayComponent implements OnInit {
     e.target.src = "../../../../../../../assets/images/user_crack.png";
   }
 
-  createComment(idVideo: string ){
-    if(this.userId == ''){
+  handleAuthorError(e: any) {
+    console.log(e);
+    e.target.src = "../../../../../../../assets/images/anime.png";
+  }
+
+  createComment(idVideo: string) {
+    if (this.userId == '') {
       this.snackBar.openFromComponent(SnackBarComponent, {
         duration: 3000
       });
-    }else{
+    } else {
       let newForm = {
         ...this.form.value,
       };
@@ -265,19 +309,19 @@ export class PlayComponent implements OnInit {
 
   }
 
-  openSubmit(event: any){
+  openSubmit(event: any) {
 
-    if(event.target.style.borderBottom == '1px solid black'){
+    if (event.target.style.borderBottom == '1px solid black') {
       console.log('open');
       event.target.style.borderBottom = '1px solid #ccc';
-    }else{
+    } else {
       console.log('open1');
       event.target.style.borderBottom = '1px solid black';
     }
     this.btnSubmit = true;
   }
 
-  closeSubmit(){
+  closeSubmit() {
     this.btnSubmit = false;
   }
 

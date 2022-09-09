@@ -12,13 +12,13 @@
                         <div class="vid-info" (click)="playVideo(video._id)">
                             <a class="owner-des" >{{video.title}}</a>
                             <p class="owner-name">{{video.author.name}}</p>
-                            <p *ngIf="video.hour > 24">{{video.views}} Views &bull; {{video.day}} day ago</p>
-                            <p *ngIf="video.hour > 0 && video.hour < 25">{{video.views}} Views &bull; {{video.hour}}
-                                hour ago</p>
-                            <p *ngIf="video.hour < 1 && video.minute > 0">{{video.views}} Views &bull; {{video.minute}}
-                                minute ago</p>
-                            <p *ngIf="video.hour < 1 && video.minute < 1">{{video.views}} Views &bull; {{video.second}}
-                                second ago</p>
+                            <p *ngIf="video.hour > 24">{{video.views}} lượt xem &bull; {{video.day}} ngày trước</p>
+                            <p *ngIf="video.hour > 0 && video.hour < 25">{{video.views}} lượt xem &bull; {{video.hour}}
+                                tiếng trước</p>
+                            <p *ngIf="video.hour < 1 && video.minute > 0">{{video.views}} lượt xem &bull; {{video.minute}}
+                                phút trước</p>
+                            <p *ngIf="video.hour < 1 && video.minute < 1">{{video.views}} lượt xem &bull; {{video.second}}
+                               giây trước</p>
                         </div>
                     </div>
                 </div>
@@ -38,16 +38,16 @@
                     </a>
                     <div class="flex-div">
                         <img (error)="handleError($event)" src="{{video.author.avatar}}" alt="ava">
-                        <div class="vid-info"  (click)="playVideo(video._id)">
+                        <div class="vid-info" (click)="playVideo(video._id)">
                             <a class="owner-des" >{{video.title}}</a>
                             <p class="owner-name">{{video.author.name}}</p>
-                            <p *ngIf="video.hour > 24">{{video.views}} Views &bull; {{video.day}} day ago</p>
-                            <p *ngIf="video.hour > 0 && video.hour < 25">{{video.views}} Views &bull; {{video.hour}}
-                                hour ago</p>
-                            <p *ngIf="video.hour < 1 && video.minute > 0">{{video.views}} Views &bull; {{video.minute}}
-                                minute ago</p>
-                            <p *ngIf="video.hour < 1 && video.minute < 1">{{video.views}} Views &bull; {{video.second}}
-                                second ago</p>
+                            <p *ngIf="video.hour > 24">{{video.views}} lượt xem &bull; {{video.day}} ngày trước</p>
+                            <p *ngIf="video.hour > 0 && video.hour < 25">{{video.views}} lượt xem &bull; {{video.hour}}
+                                tiếng trước</p>
+                            <p *ngIf="video.hour < 1 && video.minute > 0">{{video.views}} lượt xem &bull; {{video.minute}}
+                                phút trước</p>
+                            <p *ngIf="video.hour < 1 && video.minute < 1">{{video.views}} lượt xem &bull; {{video.second}}
+                               giây trước</p>
                         </div>
                     </div>
                 </div>

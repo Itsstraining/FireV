@@ -37,21 +37,20 @@
         <img (click)="home()" src="../../../assets/images/LogoFirerV.png"
             alt="logo icon" class="logo">
     </div>
-    <div class="nav-middle flex-div">
+    <div class="nav-middle flex-div" (blur)="resultShow = false">
         <div class="search-box flex-div">
-            <input style="color:white" type="text" placeholder="Search">
+            <input style="color:white" type="text" placeholder="Search"
+            (keyup)="onFilterTextChanged($event)"  (focus)="resultShow = true">
             <i class="material-icons" style="cursor:pointer;">search</i>
-            <!-- <img src="../../../assets/images/search.png" alt="search-icon"> -->
         </div>
         <div class="mic-icon">
             <i class="fa fa-microphone" aria-hidden="true"></i>
         </div>
-
-        <!-- <div class = "vid-icon">
-        <i style="margin-left:5%" class="fa fa-video-camera" aria-hidden="true"> 
-        </i> -->
-        <!-- <img src="../../../assets/images/search.png" alt="search-icon"> -->
-        <!-- <img src="../../../assets/images/voice-search.png" alt="" class="mic-icon"> -->
+        <ul class="nav-middle"id="myUL" *ngIf="(searchResult$ | async)?.isSuccess && resultShow == true"> 
+            <li  *ngFor="let suggest of (searchResult$ | async)?.searchResult ; let i = index">
+                <a  *ngIf="i < 5"  (click)="playVideo(suggest.video_id)">{{suggest.title}}</a>
+            </li>
+        </ul>
     </div>
     <div class="nav-right flex-div">
         <button (click)="goToAdd()"

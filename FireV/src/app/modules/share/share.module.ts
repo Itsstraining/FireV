@@ -23,6 +23,7 @@ import { DiscoverComponent } from 'src/app/pages/components/discover/discover.co
 import { ViewProfileComponent } from 'src/app/pages/components/view-profile/view-profile.component';
 import { IntroComponent } from 'src/app/pages/components/intro/intro.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgxDropzoneModule
   ],
   exports: [
     ViewProfileComponent,
@@ -70,8 +72,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FormsModule,
     UpdateComponent,
     MatSnackBarModule,
-    SnackBarComponent
-
+    SnackBarComponent,
+    NgxDropzoneModule
 
   ],
 })

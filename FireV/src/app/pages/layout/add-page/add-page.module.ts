@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AddPageRoutingModule } from './add-page-routing.module';
 import { AddPageComponent } from './add-page.component';
 import { ShareModule } from 'src/app/modules/share/share.module';
-import { FormsModule } from '@angular/forms';
 
 
 @NgModule({

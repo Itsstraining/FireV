@@ -9,8 +9,14 @@ export class InteractService {
   callbacks: any[] = []
   constructor() {
   }
-  turnMenu() {
-    this.isCheck = !this.isCheck
+  turnOn() {
+    this.isCheck = true;
+    this.callbacks.forEach((callback) => {
+      callback(this.isCheck)
+    })
+  }
+  turnOff() {
+    this.isCheck = false;
     this.callbacks.forEach((callback) => {
       callback(this.isCheck)
     })

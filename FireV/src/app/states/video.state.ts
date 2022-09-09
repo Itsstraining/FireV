@@ -7,4 +7,5 @@ export interface VideoState{
     isLoading: boolean;
     idToken: string;
     _id: string;
+    isSuccess: boolean;
 }
