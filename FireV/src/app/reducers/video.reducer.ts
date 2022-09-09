@@ -302,6 +302,7 @@ export const videoReducer = createReducer(
       isLoading: true,
       _id: action.id,
       idToken: action.idToken,
+      isSuccess: false,
     }
   }),
   on(VideoActions.deleteVideoSucceed, (state, action) => {
@@ -310,6 +311,7 @@ export const videoReducer = createReducer(
       isLoading: false,
       videoLoad: action.video,
       _id: "",
+      isSuccess: true,
     }
     // console.log(action.video);
     return newState;
@@ -320,7 +322,8 @@ export const videoReducer = createReducer(
       ...state,
       error: action.error,
       isLoading: false,
-      _id: ""
+      _id: "",
+      isSuccess: true,
     }
   }),
 
